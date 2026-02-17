@@ -1,2 +1,3 @@
 import TernaryFrames.Basic
 import TernaryFrames.IncoherenceSpace
+import TernaryFrames.Containment

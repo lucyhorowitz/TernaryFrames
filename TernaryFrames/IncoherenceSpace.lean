@@ -71,10 +71,7 @@ end Move
 /-- An `IncoherenceSpace` on a language `L` specifies a set of *incoherent* positions
 (where a position is a `List (Move L)`).
 
-The constraints are:
-* The empty position is coherent (`empty_coherent`).
-* Any position containing both `+p` and `−p` for an atomic `p` is incoherent
-  (`atomic_incoherent`).
+The only constraint is that the empty position is coherent (`empty_coherent`).
 
 Persistence is **not** assumed: `Γ ∈ I` does not imply `Γ ++ Δ ∈ I`. This is the key
 innovation enabling the accommodation of defeasible material incompatibilities. -/
@@ -83,9 +80,6 @@ class IncoherenceSpace (L : Type u) where
   I : Set (List (Move L))
   /-- The empty position is coherent. -/
   empty_coherent : [] ∉ I
-  /-- Asserting and denying the same sentence yields an incoherent position. -/
-  atomic_incoherent : ∀ (p : L) (Γ : List (Move L)),
-    Move.assert p ∈ Γ → Move.deny p ∈ Γ → Γ ∈ I
 
 namespace IncoherenceSpace
 
