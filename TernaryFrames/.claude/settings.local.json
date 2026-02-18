@@ -5,7 +5,8 @@
       "Bash(lake build:*)",
       "WebFetch(domain:ncatlab.org)",
       "Bash(xargs:*)",
-      "Bash(pdftotext:*)"
+      "Bash(pdftotext:*)",
+      "Bash(python3:*)"
     ]
   }
 }

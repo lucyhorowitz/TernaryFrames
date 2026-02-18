@@ -6,8 +6,12 @@ Authors: Lucy Horowitz
 import TernaryFrames.IncoherenceSpace
 import Mathlib.Data.Set.Basic
 import Mathlib.Data.Set.Lattice
+import Mathlib.Data.Set.Finite.Basic
+import Mathlib.Data.Fintype.Basic
+import Mathlib.Data.Fintype.Sum
 import Mathlib.Order.BooleanAlgebra.Defs
 import Mathlib.Order.Disjoint
+import Mathlib.Order.Zorn
 
 /-!
 # Containment and the Boolean Algebra of Closed Sets
@@ -365,15 +369,292 @@ instance instComplementedLattice : ComplementedLattice (ClosedSet L) where
 /-! #### Distributivity
 
 The lattice of closed sets is distributive. The proof uses Zorn's lemma to construct maximal
-coherent positions, which provide an injective lattice homomorphism into a power-set Boolean
-algebra. For now, we use `sorry` for the distributivity proof and will fill it in later. -/
+coherent sets of moves, which provide an injective lattice homomorphism into a power-set
+Boolean algebra. Distributivity is inherited from the power-set algebra. -/
 
+/-! ##### Coherent sets of moves -/
+
+/-- The set of moves appearing in a position. -/
+def moves (Γ : List (Move L)) : Set (Move L) := {m | m ∈ Γ}
+
+omit [IncoherenceSpace L] [IsContainment L] in
+theorem mem_moves_iff {Γ : List (Move L)} {m : Move L} : m ∈ moves Γ ↔ m ∈ Γ :=
+  Iff.rfl
+
+omit [IncoherenceSpace L] [IsContainment L] in
+theorem moves_append (Γ Δ : List (Move L)) :
+    moves (Γ ++ Δ) = moves Γ ∪ moves Δ := by
+  ext m; simp [moves, List.mem_append]
+
+/-- A set of moves is **coherent** if it does not contain both `+p` and `−p` for any `p`. -/
+def CoherentMoves (S : Set (Move L)) : Prop :=
+  ∀ p : L, ¬(Move.assert p ∈ S ∧ Move.deny p ∈ S)
+
+omit [IncoherenceSpace L] [IsContainment L] in
+theorem coherentMoves_of_subset {S T : Set (Move L)}
+    (hST : S ⊆ T) (hT : CoherentMoves T) : CoherentMoves S :=
+  fun p h => hT p ⟨hST h.1, hST h.2⟩
+
+/-- Under Containment, a position is coherent (not in `I`) iff its move-set is coherent. -/
+theorem not_mem_I_iff_coherentMoves (Γ : List (Move L)) :
+    Γ ∉ I ↔ CoherentMoves (moves Γ) := by
+  rw [mem_I_iff]
+  constructor
+  · intro h p ⟨ha, hd⟩
+    exact h ⟨p, mem_moves_iff.mp ha, mem_moves_iff.mp hd⟩
+  · intro h ⟨p, ha, hd⟩
+    exact h p ⟨mem_moves_iff.mpr ha, mem_moves_iff.mpr hd⟩
+
+/-- Under Containment, a `dperp`-closed set is upward-closed with respect to the move-set
+inclusion: if `Γ ∈ X` and every move in `Γ` also appears in `Δ`, then `Δ ∈ X`. -/
+theorem closed_moves_mono {X : Set (List (Move L))} (hX : dperp X = X)
+    {Γ Δ : List (Move L)} (hΓ : Γ ∈ X) (hmoves : moves Γ ⊆ moves Δ) :
+    Δ ∈ X := by
+  rw [← hX]
+  intro Θ hΘ
+  -- Θ ∈ perp X, so Θ ++ Γ ∈ I
+  have hΘΓ : Θ ++ Γ ∈ I := hΘ Γ hΓ
+  -- Extract the conflicting atom from Θ ++ Γ
+  obtain ⟨p, ha, hd⟩ := (mem_I_iff (Θ ++ Γ)).mp hΘΓ
+  rw [List.mem_append] at ha hd
+  -- Lift the conflict to Δ ++ Θ using hmoves : moves Γ ⊆ moves Δ
+  apply (mem_I_iff (Δ ++ Θ)).mpr
+  exact ⟨p,
+    List.mem_append.mpr (ha.elim (fun h => Or.inr h)
+      (fun h => Or.inl (mem_moves_iff.mp (hmoves (mem_moves_iff.mpr h))))),
+    List.mem_append.mpr (hd.elim (fun h => Or.inr h)
+      (fun h => Or.inl (mem_moves_iff.mp (hmoves (mem_moves_iff.mpr h)))))⟩
+
+omit [IncoherenceSpace L] [IsContainment L] in
+/-- The union of a chain of coherent move-sets is coherent. -/
+theorem coherentMoves_sUnion_chain {c : Set (Set (Move L))}
+    (hc : IsChain (· ⊆ ·) c) (hcoh : ∀ S ∈ c, CoherentMoves S) :
+    CoherentMoves (⋃₀ c) := by
+  intro p ⟨⟨S, hSc, haS⟩, ⟨T, hTc, hdT⟩⟩
+  rcases hc.total hSc hTc with hST | hTS
+  · exact hcoh T hTc p ⟨hST haS, hdT⟩
+  · exact hcoh S hSc p ⟨haS, hTS hdT⟩
+
+omit [IncoherenceSpace L] [IsContainment L] in
+/-- Zorn's lemma: every coherent set of moves extends to a maximal coherent set. -/
+theorem exists_maximal_coherentMoves (S : Set (Move L)) (hS : CoherentMoves S) :
+    ∃ M, S ⊆ M ∧ CoherentMoves M ∧ ∀ T, CoherentMoves T → M ⊆ T → T = M := by
+  have := zorn_subset_nonempty {T : Set (Move L) | CoherentMoves T}
+    (fun c hc_sub hchain ⟨T₀, hT₀⟩ =>
+      ⟨⋃₀ c, coherentMoves_sUnion_chain hchain (fun S hS => hc_sub hS),
+       fun S hS => Set.subset_sUnion_of_mem hS⟩)
+    S hS
+  obtain ⟨M, hSM, hMmax⟩ := this
+  exact ⟨M, hSM, hMmax.prop, fun T hT hMT => (hMmax.eq_of_subset hT hMT).symm⟩
+
+omit [IncoherenceSpace L] [IsContainment L] in
+/-- A maximal coherent move-set contains, for each `p`, exactly one of `+p` and `−p`. -/
+theorem maximal_coherentMoves_complete {M : Set (Move L)} (hM : CoherentMoves M)
+    (hmax : ∀ T, CoherentMoves T → M ⊆ T → T = M) (p : L) :
+    Move.assert p ∈ M ∨ Move.deny p ∈ M := by
+  by_contra h
+  push_neg at h
+  have : CoherentMoves (M ∪ {Move.assert p}) := by
+    intro q ⟨ha, hd⟩
+    rw [Set.mem_union, Set.mem_singleton_iff] at ha hd
+    rcases ha with ha_M | ha_eq <;> rcases hd with hd_M | hd_eq
+    · -- +q ∈ M, -q ∈ M: contradicts CoherentMoves M
+      exact hM q ⟨ha_M, hd_M⟩
+    · -- +q ∈ M, -q = +p: impossible (different constructors)
+      cases hd_eq
+    · -- +q = +p, -q ∈ M: then q = p and -p ∈ M, contradicting h.2
+      have := Move.assert.inj ha_eq
+      subst this
+      exact h.2 hd_M
+    · -- +q = +p, -q = +p: impossible (different constructors)
+      cases hd_eq
+  have hle : M ⊆ M ∪ {Move.assert p} := Set.subset_union_left
+  have := hmax _ this hle
+  have : Move.assert p ∈ M := this ▸ Set.mem_union_right M (Set.mem_singleton _)
+  exact h.1 this
+
+/-- If `Δ ∈ perp X` with `moves Δ ⊆ M` and `Θ ∈ X` with `moves Θ ⊆ M`,
+then `Δ ++ Θ ∈ I` while `moves (Δ ++ Θ) ⊆ M`, contradicting `CoherentMoves M`. -/
+theorem perp_disjoint_from_M
+    {M : Set (Move L)} (hM : CoherentMoves M)
+    {Δ : List (Move L)} (hΔperp : Δ ∈ perp X) (hΔM : moves Δ ⊆ M)
+    {Θ : List (Move L)} (hΘX : Θ ∈ X) (hΘM : moves Θ ⊆ M) : False := by
+  have hΔΘ : Δ ++ Θ ∈ I := hΔperp Θ hΘX
+  obtain ⟨p, ha, hd⟩ := (mem_I_iff (Δ ++ Θ)).mp hΔΘ
+  rw [List.mem_append] at ha hd
+  exact hM p ⟨ha.elim (fun h => hΔM h) (fun h => hΘM h),
+              hd.elim (fun h => hΔM h) (fun h => hΘM h)⟩
+
+/-- The Φ map: `Phi X M` holds when some position in `X` has all its moves in `M`. -/
+def Phi (X : Set (List (Move L))) (M : Set (Move L)) : Prop :=
+  ∃ Γ ∈ X, moves Γ ⊆ M
+
+/-! ##### The distributivity proof
+
+The distributivity proof uses Zorn's lemma and the fact that `Move L` is finite. When `L` is
+a `Fintype`, maximal coherent move-sets can be realized as lists, enabling a representation
+into a power-set Boolean algebra. -/
+
+section Distributivity
+
+variable [Fintype L]
+
+/-- `Move L` is finite when `L` is. -/
+noncomputable instance instFintypeMove : Fintype (Move L) :=
+  Fintype.ofEquiv (L ⊕ L)
+    (Equiv.mk
+      (fun x : L ⊕ L => match x with | Sum.inl a => Move.assert a | Sum.inr a => Move.deny a)
+      (fun x : Move L => match x with | Move.assert a => Sum.inl a | Move.deny a => Sum.inr a)
+      (fun x => by cases x <;> rfl)
+      (fun x => by cases x <;> rfl))
+
+/-- Convert a set of moves to a list with the same elements. -/
+noncomputable def setToList (S : Set (Move L)) : List (Move L) :=
+  (Set.toFinite S).toFinset.toList
+
+omit [IncoherenceSpace L] [IsContainment L] in
+@[simp]
+theorem moves_setToList (S : Set (Move L)) : moves (setToList S) = S := by
+  ext m; simp [setToList, moves, Set.Finite.mem_toFinset]
+
+/-- A list representing a coherent move-set is coherent. -/
+theorem setToList_coherent {M : Set (Move L)} (hM : CoherentMoves M) :
+    setToList M ∉ I := by
+  rw [not_mem_I_iff_coherentMoves, moves_setToList]; exact hM
+
+/-- Key lemma: the list representing a maximal coherent move-set `M` is in `perp X`
+whenever `¬Phi X M` (no position in `X` has all its moves in `M`).
+
+For any `Θ ∈ X`:
+- If `Θ ∈ I`, then `setToList M ++ Θ ∈ I` by persistence.
+- If `Θ ∉ I` but `moves Θ ⊆ M`, then `Theta ∈ X` gives `Phi X M`, contradiction.
+- If `Θ ∉ I` and `moves Θ ⊄ M`, pick `a ∈ moves Θ \ M`; by completeness of `M`,
+  the opposite of `a` is in `M = moves (setToList M)`, giving the conflict. -/
+theorem setToList_mem_perp_of_not_Phi {X : Set (List (Move L))}
+    {M : Set (Move L)} (hM : CoherentMoves M) (hmax : ∀ T, CoherentMoves T → M ⊆ T → T = M)
+    (hnX : ¬Phi X M) : setToList M ∈ perp X := by
+  intro Θ hΘ
+  -- If Θ ∈ I, done by persistence.
+  by_cases hΘI : Θ ∈ I
+  · exact persistent_right (setToList M) Θ hΘI
+  -- Θ ∉ I. Since ¬Phi X M, moves Θ ⊄ M.
+  · have hΘM : ¬(moves Θ ⊆ M) := fun h => hnX ⟨Θ, hΘ, h⟩
+    -- Pick a move in Θ not in M.
+    rw [Set.not_subset] at hΘM
+    obtain ⟨a, haΘ, haM⟩ := hΘM
+    -- By completeness of M, the opposite of a is in M.
+    -- So a and its opposite both appear in setToList M ++ Θ, giving incoherence.
+    rcases a with ⟨p⟩ | ⟨p⟩
+    · -- a = assert p ∈ Θ, assert p ∉ M, so deny p ∈ M by completeness
+      have hdpM : Move.deny p ∈ M := by
+        rcases maximal_coherentMoves_complete hM hmax p with h | h
+        · exact absurd h haM
+        · exact h
+      -- deny p ∈ setToList M since moves(setToList M) = M
+      have hdp_list : Move.deny p ∈ setToList M := by
+        rw [← mem_moves_iff, moves_setToList]; exact hdpM
+      rw [mem_I_iff]
+      exact ⟨p,
+        List.mem_append.mpr (Or.inr (mem_moves_iff.mp haΘ)),
+        List.mem_append.mpr (Or.inl hdp_list)⟩
+    · -- a = deny p ∈ Θ, deny p ∉ M, so assert p ∈ M by completeness
+      have hapM : Move.assert p ∈ M := by
+        rcases maximal_coherentMoves_complete hM hmax p with h | h
+        · exact h
+        · exact absurd h haM
+      -- assert p ∈ setToList M since moves(setToList M) = M
+      have hap_list : Move.assert p ∈ setToList M := by
+        rw [← mem_moves_iff, moves_setToList]; exact hapM
+      rw [mem_I_iff]
+      exact ⟨p,
+        List.mem_append.mpr (Or.inl hap_list),
+        List.mem_append.mpr (Or.inr (mem_moves_iff.mp haΘ))⟩
+
+set_option linter.unusedFintypeInType false in
+/-- `¬Phi X M` and `¬Phi Y M` imply `¬Phi (dperp (X ∪ Y)) M`.
+
+The list `setToList M` is in `perp X ∩ perp Y = perp (X ∪ Y)`. Any `Γ ∈ dperp(X ∪ Y)`
+with `moves Γ ⊆ M` gives `Γ ++ setToList M ∈ I` with `moves (Γ ++ setToList M) ⊆ M`,
+contradicting coherence of `M`. -/
+theorem not_Phi_dperp_union {X Y : Set (List (Move L))}
+    {M : Set (Move L)} (hM : CoherentMoves M) (hmax : ∀ T, CoherentMoves T → M ⊆ T → T = M)
+    (hnX : ¬Phi X M) (hnY : ¬Phi Y M) : ¬Phi (dperp (X ∪ Y)) M := by
+  -- setToList M ∈ perp X and setToList M ∈ perp Y
+  have hΨX := setToList_mem_perp_of_not_Phi hM hmax hnX
+  have hΨY := setToList_mem_perp_of_not_Phi hM hmax hnY
+  -- So setToList M ∈ perp (X ∪ Y)
+  have hΨ : setToList M ∈ perp (X ∪ Y) := by
+    rw [perp_union]; exact ⟨hΨX, hΨY⟩
+  -- Suppose Γ ∈ dperp(X ∪ Y) with moves Γ ⊆ M.
+  intro ⟨Γ, hΓ_cl, hΓ_M⟩
+  -- Then Γ ++ setToList M ∈ I.
+  have hΓΨ : Γ ++ setToList M ∈ I := hΓ_cl (setToList M) hΨ
+  -- But moves(Γ ++ setToList M) ⊆ M, contradicting CoherentMoves M.
+  have hΓΨ_M : moves (Γ ++ setToList M) ⊆ M := by
+    rw [moves_append, moves_setToList]; exact Set.union_subset hΓ_M (Set.Subset.refl M)
+  exact (not_mem_I_iff_coherentMoves _).mpr (coherentMoves_of_subset hΓΨ_M hM) hΓΨ
+
+/-- The lattice of `dperp`-closed sets is distributive.
+
+The proof proceeds by contradiction using Zorn's lemma. Given `Γ ∈ (X ⊔ Y) ⊓ (X ⊔ Z)`
+and `Δ ∈ perp (X ∪ (Y ∩ Z))`, if `Γ ++ Δ ∉ I`, extend `moves (Γ ++ Δ)` to a maximal
+coherent set `M`. Then:
+- `Δ ∈ perp X` with `moves Δ ⊆ M` gives `¬Phi X M`.
+- `Δ ∈ perp (Y ∩ Z)` with `M` coherent gives `¬(Phi Y M ∧ Phi Z M)`.
+- So `¬Phi X M ∧ ¬Phi Y M` or `¬Phi X M ∧ ¬Phi Z M`.
+- Either way, `¬Phi (dperp (X ∪ Y)) M` or `¬Phi (dperp (X ∪ Z)) M`.
+- But `Γ ∈ dperp(X ∪ Y)` with `moves Γ ⊆ M` gives `Phi (dperp(X ∪ Y)) M` — contradiction. -/
 instance instDistribLattice : DistribLattice (ClosedSet L) where
-  le_sup_inf := sorry
+  le_sup_inf := by
+    intro x y z Γ ⟨hΓxy, hΓxz⟩
+    -- Need: ∀ Δ ∈ perp(X ∪ (Y ∩ Z)), Γ ++ Δ ∈ I.
+    simp only [coe_sup, coe_inf] at *
+    intro Δ hΔ
+    -- Δ ∈ perp(X ∪ (Y ∩ Z)) = perp X ∩ perp(Y ∩ Z)
+    have hΔ_X : Δ ∈ perp x.carrier := by
+      rw [perp_union] at hΔ; exact hΔ.1
+    have hΔ_YZ : Δ ∈ perp (y.carrier ∩ z.carrier) := by
+      rw [perp_union] at hΔ; exact hΔ.2
+    -- If Γ ++ Δ ∈ I, done. Otherwise, derive a contradiction.
+    by_contra hΓΔ
+    -- Extend moves(Γ ++ Δ) to maximal coherent M.
+    have hcoh := (not_mem_I_iff_coherentMoves (Γ ++ Δ)).mp hΓΔ
+    obtain ⟨M, hGDM, hMcoh, hMmax⟩ := exists_maximal_coherentMoves
+      (moves (Γ ++ Δ)) hcoh
+    have hΓM : moves Γ ⊆ M := by
+      intro m hm; exact hGDM (moves_append Γ Δ ▸ Set.mem_union_left _ hm)
+    have hΔM : moves Δ ⊆ M := by
+      intro m hm; exact hGDM (moves_append Γ Δ ▸ Set.mem_union_right _ hm)
+    -- Δ ∈ perp X with moves Δ ⊆ M gives ¬Phi X M.
+    have hnX : ¬Phi x.carrier M := fun ⟨Θ, hΘ, hΘM⟩ =>
+      perp_disjoint_from_M hMcoh hΔ_X hΔM hΘ hΘM
+    -- If both Phi Y M and Phi Z M, then there's a position in Y ∩ Z with moves ⊆ M,
+    -- contradicting Δ ∈ perp(Y ∩ Z) via perp_disjoint_from_M.
+    have hnYZ : ¬Phi y.carrier M ∨ ¬Phi z.carrier M := by
+      by_contra h
+      push_neg at h
+      obtain ⟨⟨ΘY, hΘY, hΘYM⟩, ⟨ΘZ, hΘZ, hΘZM⟩⟩ := h
+      have hΘ_YZ : ΘY ++ ΘZ ∈ y.carrier ∩ z.carrier := by
+        constructor
+        · exact closed_moves_mono y.closed hΘY
+            (fun m hm => moves_append ΘY ΘZ ▸ Set.mem_union_left _ hm)
+        · exact closed_moves_mono z.closed hΘZ
+            (fun m hm => moves_append ΘY ΘZ ▸ Set.mem_union_right _ hm)
+      have hΘM : moves (ΘY ++ ΘZ) ⊆ M := by
+        rw [moves_append]; exact Set.union_subset hΘYM hΘZM
+      exact perp_disjoint_from_M hMcoh hΔ_YZ hΔM hΘ_YZ hΘM
+    -- Now derive contradiction: Γ ∈ dperp(X ∪ Y) with moves ⊆ M, but ¬Phi(dperp(X ∪ Y)) M.
+    rcases hnYZ with hnY | hnZ
+    · exact not_Phi_dperp_union hMcoh hMmax hnX hnY
+        ⟨Γ, hΓxy, hΓM⟩
+    · exact not_Phi_dperp_union hMcoh hMmax hnX hnZ
+        ⟨Γ, hΓxz, hΓM⟩
 
 /-- Under all-and-only Containment, the lattice of `dperp`-closed sets is a Boolean algebra. -/
 noncomputable instance instBooleanAlgebra : BooleanAlgebra (ClosedSet L) :=
   DistribLattice.booleanAlgebraOfComplemented (ClosedSet L)
+
+end Distributivity
 
 end ClosedSet
 
