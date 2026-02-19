@@ -1,3 +1,5 @@
 import TernaryFrames.Basic
 import TernaryFrames.IncoherenceSpace
 import TernaryFrames.Containment
+import TernaryFrames.DayConvolution
+import TernaryFrames.ISSTernaryFrame

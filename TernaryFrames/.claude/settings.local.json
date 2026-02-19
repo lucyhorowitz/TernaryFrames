@@ -6,7 +6,10 @@
       "WebFetch(domain:ncatlab.org)",
       "Bash(xargs:*)",
       "Bash(pdftotext:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(wc:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)"
     ]
   }
 }
