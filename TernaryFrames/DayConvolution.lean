@@ -370,6 +370,7 @@ instance instCommMonoid [IsContainment L] : CommMonoid (ClosedSet L) where
 
 /-! #### Quantale axioms -/
 
+omit [IsExchange L] in
 /-- Auxiliary: `fusion X (⋃ Y ∈ s, Y.carrier) = ⋃ Y ∈ s, fusion X Y.carrier`. -/
 private theorem fusion_biUnion_right (X : Set (List (Move L))) (s : Set (ClosedSet L)) :
     fusion X (⋃ Y ∈ s, Y.carrier) = ⋃ Y ∈ s, fusion X Y.carrier := by
