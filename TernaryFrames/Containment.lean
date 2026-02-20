@@ -251,9 +251,11 @@ end Containment
 /-! ### ClosedSet: the type of dperp-closed sets -/
 
 /-- A `ClosedSet` is a set of positions that is `dperp`-closed, i.e., `dperp X = X`.
-This type is defined under `IsContainment` (which implies both Exchange and Persistence),
-as these are needed for dperp to be a well-behaved closure operator. -/
-structure ClosedSet (L : Type u) [IncoherenceSpace L] [IsContainment L] where
+The type requires no structural conditions beyond the base `IncoherenceSpace`; the closed sets
+just have different shapes depending on the structural rules satisfied (lists, multisets, sets).
+Exchange is needed for `dperp` to be a closure operator; Containment is needed for the
+Boolean algebra structure. -/
+structure ClosedSet (L : Type u) [IncoherenceSpace L] where
   /-- The underlying set of positions. -/
   carrier : Set (List (Move L))
   /-- The set is closed under double-perp. -/
@@ -261,7 +263,7 @@ structure ClosedSet (L : Type u) [IncoherenceSpace L] [IsContainment L] where
 
 namespace ClosedSet
 
-variable {L : Type u} [IncoherenceSpace L] [IsContainment L]
+variable {L : Type u} [IncoherenceSpace L]
 
 @[ext]
 theorem ext {X Y : ClosedSet L} (h : ∀ Γ, Γ ∈ X.carrier ↔ Γ ∈ Y.carrier) : X = Y := by
@@ -283,24 +285,10 @@ instance instPartialOrder : PartialOrder (ClosedSet L) where
 
 theorem le_def {X Y : ClosedSet L} : X ≤ Y ↔ X.carrier ⊆ Y.carrier := Iff.rfl
 
-instance instBot : Bot (ClosedSet L) where
-  bot := ⟨I, I_dperp_closed⟩
+-- Exchange is needed for dperp to be a closure operator and for the lattice structure.
+section Exchange
 
-instance instTop : Top (ClosedSet L) where
-  top := ⟨Set.univ, dperp_univ⟩
-
-instance instOrderBot : OrderBot (ClosedSet L) where
-  bot_le X := I_subset_closed X.closed
-
-instance instOrderTop : OrderTop (ClosedSet L) where
-  le_top _ := Set.subset_univ _
-
-instance instBoundedOrder : BoundedOrder (ClosedSet L) where
-  __ := instOrderBot
-  __ := instOrderTop
-
-@[simp] theorem coe_bot : (⊥ : ClosedSet L).carrier = I := rfl
-@[simp] theorem coe_top : (⊤ : ClosedSet L).carrier = Set.univ := rfl
+variable [IsExchange L]
 
 /-- The infimum of two closed sets is their intersection. -/
 def inf' (X Y : ClosedSet L) : ClosedSet L :=
@@ -309,12 +297,6 @@ def inf' (X Y : ClosedSet L) : ClosedSet L :=
 /-- The supremum of two closed sets is the dperp-closure of their union. -/
 def sup' (X Y : ClosedSet L) : ClosedSet L :=
   ⟨dperp (X.carrier ∪ Y.carrier), dperp_idempotent _⟩
-
-/-- The complement of a closed set is its perp. -/
-def compl' (X : ClosedSet L) : ClosedSet L :=
-  ⟨perp X.carrier, perp_dperp_closed X.carrier⟩
-
-instance instCompl : Compl (ClosedSet L) where compl := compl'
 
 instance instSemilatticeInf : SemilatticeInf (ClosedSet L) where
   inf := inf'
@@ -335,10 +317,43 @@ instance instLattice : Lattice (ClosedSet L) where
   __ := instSemilatticeInf
   __ := instSemilatticeSup
 
+instance instTop : Top (ClosedSet L) where
+  top := ⟨Set.univ, dperp_univ⟩
+
+instance instOrderTop : OrderTop (ClosedSet L) where
+  le_top _ := Set.subset_univ _
+
 @[simp] theorem coe_inf (X Y : ClosedSet L) :
     (X ⊓ Y).carrier = X.carrier ∩ Y.carrier := rfl
 @[simp] theorem coe_sup (X Y : ClosedSet L) :
     (X ⊔ Y).carrier = dperp (X.carrier ∪ Y.carrier) := rfl
+@[simp] theorem coe_top : (⊤ : ClosedSet L).carrier = Set.univ := rfl
+
+end Exchange
+
+-- Containment is needed for the bottom element, complementation, and Boolean algebra.
+section Containment
+
+variable [IsContainment L]
+
+instance instBot : Bot (ClosedSet L) where
+  bot := ⟨I, I_dperp_closed⟩
+
+instance instOrderBot : OrderBot (ClosedSet L) where
+  bot_le X := I_subset_closed X.closed
+
+instance instBoundedOrder : BoundedOrder (ClosedSet L) where
+  __ := instOrderBot
+  __ := instOrderTop
+
+@[simp] theorem coe_bot : (⊥ : ClosedSet L).carrier = I := rfl
+
+/-- The complement of a closed set is its perp. -/
+def compl' (X : ClosedSet L) : ClosedSet L :=
+  ⟨perp X.carrier, perp_dperp_closed X.carrier⟩
+
+instance instCompl : Compl (ClosedSet L) where compl := compl'
+
 @[simp] theorem coe_compl (X : ClosedSet L) : Xᶜ.carrier = perp X.carrier := rfl
 
 /-! #### Complementation -/
@@ -366,6 +381,8 @@ theorem isCompl_compl (X : ClosedSet L) : IsCompl X Xᶜ where
 instance instComplementedLattice : ComplementedLattice (ClosedSet L) where
   exists_isCompl X := ⟨Xᶜ, isCompl_compl X⟩
 
+end Containment
+
 /-! #### Distributivity
 
 The lattice of closed sets is distributive. The proof uses Zorn's lemma to construct maximal
@@ -377,11 +394,11 @@ Boolean algebra. Distributivity is inherited from the power-set algebra. -/
 /-- The set of moves appearing in a position. -/
 def moves (Γ : List (Move L)) : Set (Move L) := {m | m ∈ Γ}
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 theorem mem_moves_iff {Γ : List (Move L)} {m : Move L} : m ∈ moves Γ ↔ m ∈ Γ :=
   Iff.rfl
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 theorem moves_append (Γ Δ : List (Move L)) :
     moves (Γ ++ Δ) = moves Γ ∪ moves Δ := by
   ext m; simp [moves, List.mem_append]
@@ -390,10 +407,12 @@ theorem moves_append (Γ Δ : List (Move L)) :
 def CoherentMoves (S : Set (Move L)) : Prop :=
   ∀ p : L, ¬(Move.assert p ∈ S ∧ Move.deny p ∈ S)
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 theorem coherentMoves_of_subset {S T : Set (Move L)}
     (hST : S ⊆ T) (hT : CoherentMoves T) : CoherentMoves S :=
   fun p h => hT p ⟨hST h.1, hST h.2⟩
+
+variable [IsContainment L]
 
 /-- Under Containment, a position is coherent (not in `I`) iff its move-set is coherent. -/
 theorem not_mem_I_iff_coherentMoves (Γ : List (Move L)) :
@@ -425,7 +444,7 @@ theorem closed_moves_mono {X : Set (List (Move L))} (hX : dperp X = X)
     List.mem_append.mpr (hd.elim (fun h => Or.inr h)
       (fun h => Or.inl (mem_moves_iff.mp (hmoves (mem_moves_iff.mpr h)))))⟩
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 /-- The union of a chain of coherent move-sets is coherent. -/
 theorem coherentMoves_sUnion_chain {c : Set (Set (Move L))}
     (hc : IsChain (· ⊆ ·) c) (hcoh : ∀ S ∈ c, CoherentMoves S) :
@@ -435,7 +454,7 @@ theorem coherentMoves_sUnion_chain {c : Set (Set (Move L))}
   · exact hcoh T hTc p ⟨hST haS, hdT⟩
   · exact hcoh S hSc p ⟨haS, hTS hdT⟩
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 /-- Zorn's lemma: every coherent set of moves extends to a maximal coherent set. -/
 theorem exists_maximal_coherentMoves (S : Set (Move L)) (hS : CoherentMoves S) :
     ∃ M, S ⊆ M ∧ CoherentMoves M ∧ ∀ T, CoherentMoves T → M ⊆ T → T = M := by
@@ -447,7 +466,7 @@ theorem exists_maximal_coherentMoves (S : Set (Move L)) (hS : CoherentMoves S) :
   obtain ⟨M, hSM, hMmax⟩ := this
   exact ⟨M, hSM, hMmax.prop, fun T hT hMT => (hMmax.eq_of_subset hT hMT).symm⟩
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 /-- A maximal coherent move-set contains, for each `p`, exactly one of `+p` and `−p`. -/
 theorem maximal_coherentMoves_complete {M : Set (Move L)} (hM : CoherentMoves M)
     (hmax : ∀ T, CoherentMoves T → M ⊆ T → T = M) (p : L) :
@@ -512,7 +531,7 @@ noncomputable instance instFintypeMove : Fintype (Move L) :=
 noncomputable def setToList (S : Set (Move L)) : List (Move L) :=
   (Set.toFinite S).toFinset.toList
 
-omit [IncoherenceSpace L] [IsContainment L] in
+omit [IncoherenceSpace L] in
 @[simp]
 theorem moves_setToList (S : Set (Move L)) : moves (setToList S) = S := by
   ext m; simp [setToList, moves, Set.Finite.mem_toFinset]
