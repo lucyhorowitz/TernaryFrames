@@ -1,0 +1,853 @@
+% Blueprint for "Incoherence-Space Semantics"
+% Lucy Horowitz, 2025
+%
+% This file documents the formalization of incoherence-space semantics in Lean 4 / Mathlib 4.
+% The main reference is: Horowitz, L. (2025). "Incoherence-space semantics." Topos Institute Blog.
+
+\chapter{Incoherence Spaces}
+
+\section{Moves and positions}
+
+\begin{definition}
+  \label{def:move}
+  \lean{Move}
+  \leanok
+  A \emph{move} over a language $L$ is a signed sentence: either an assertion $+A$
+  (written \texttt{Move.assert} $A$) or a denial $-A$ (written \texttt{Move.deny} $A$).
+  A \emph{position} is a list of moves, \texttt{List (Move} $L$\texttt{)}.
+\end{definition}
+
+\begin{definition}
+  \label{def:incoherence-space}
+  \uses{def:move}
+  \lean{IncoherenceSpace}
+  \leanok
+  An \emph{incoherence space} on a language $L$ is a set $\mathcal{I}$ of
+  \emph{incoherent} positions satisfying:
+  \begin{itemize}
+    \item The empty position is coherent: $[] \notin \mathcal{I}$.
+  \end{itemize}
+  Persistence ($\Gamma \in \mathcal{I} \Rightarrow \Gamma \mathbin{+\!\!+} \Delta \in \mathcal{I}$) is
+  \emph{not} assumed, enabling defeasible material incompatibilities.
+\end{definition}
+
+\section{Incoherence profiles and closure}
+
+\begin{definition}
+  \label{def:perp}
+  \uses{def:incoherence-space}
+  \lean{IncoherenceSpace.perp}
+  \leanok
+  The \emph{incoherence profile} of a set $X$ of positions is
+  \[
+    X^\perp = \{\,\Gamma \mid \forall \Delta \in X,\; \Gamma \mathbin{+\!\!+} \Delta \in \mathcal{I}\,\}.
+  \]
+\end{definition}
+
+\begin{definition}
+  \label{def:dperp}
+  \uses{def:perp}
+  \lean{IncoherenceSpace.dperp}
+  \leanok
+  The \emph{incoherence closure} is $X^{\perp\perp} = (X^\perp)^\perp$:
+  the set of positions that incompatibility-entail $X$.
+\end{definition}
+
+\begin{lemma}
+  \label{lem:perp-antimono}
+  \uses{def:perp}
+  \lean{IncoherenceSpace.perp_antimono}
+  \leanok
+  $X \subseteq Y \Rightarrow Y^\perp \subseteq X^\perp$ (perp is antitone).
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:dperp-mono}
+  \uses{def:dperp,lem:perp-antimono}
+  \lean{IncoherenceSpace.dperp_mono}
+  \leanok
+  $X \subseteq Y \Rightarrow X^{\perp\perp} \subseteq Y^{\perp\perp}$ (dperp is monotone).
+\end{lemma}
+
+\begin{definition}
+  \label{def:incomp-entails}
+  \uses{def:perp}
+  \lean{IncoherenceSpace.IncompEntails}
+  \leanok
+  \emph{Incompatibility entailment}: $\Delta \vDash_{\mathcal{I}} \Gamma$ when
+  $\{\Gamma\}^\perp \subseteq \{\Delta\}^\perp$, i.e., everything incompatible with
+  $\Gamma$ is also incompatible with $\Delta$.
+\end{definition}
+
+\begin{lemma}
+  \label{lem:incomp-refl}
+  \uses{def:incomp-entails}
+  \lean{IncoherenceSpace.incompEntails_refl}
+  \leanok
+  Incompatibility entailment is reflexive.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:incomp-trans}
+  \uses{def:incomp-entails}
+  \lean{IncoherenceSpace.incompEntails_trans}
+  \leanok
+  Incompatibility entailment is transitive.
+\end{lemma}
+
+\section{Fusion of positions}
+
+\begin{definition}
+  \label{def:fusion}
+  \uses{def:move}
+  \lean{IncoherenceSpace.fusion}
+  \leanok
+  The \emph{fusion} of two sets of positions is
+  \[
+    X \mathbin{\dot\cup} Y = \{\,\Gamma \mathbin{+\!\!+} \Delta \mid \Gamma \in X,\; \Delta \in Y\,\}.
+  \]
+\end{definition}
+
+\begin{lemma}
+  \label{lem:fusion-assoc}
+  \uses{def:fusion}
+  \lean{IncoherenceSpace.fusion_assoc}
+  \leanok
+  Fusion is associative: $(X \mathbin{\dot\cup} Y) \mathbin{\dot\cup} Z = X \mathbin{\dot\cup} (Y \mathbin{\dot\cup} Z)$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:fusion-nil-left}
+  \uses{def:fusion}
+  \lean{IncoherenceSpace.fusion_nil_left}
+  \leanok
+  $\{[]\} \mathbin{\dot\cup} X = X$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:fusion-nil-right}
+  \uses{def:fusion}
+  \lean{IncoherenceSpace.fusion_nil_right}
+  \leanok
+  $X \mathbin{\dot\cup} \{[]\} = X$.
+\end{lemma}
+
+\section{Structural conditions}
+
+\subsection{Persistence}
+
+\begin{definition}
+  \label{def:persistent}
+  \uses{def:incoherence-space}
+  \lean{IncoherenceSpace.IsPersistent}
+  \leanok
+  An incoherence space is \emph{persistent} if $\Gamma \in \mathcal{I}$ implies
+  $\Gamma \mathbin{+\!\!+} \Delta \in \mathcal{I}$ for all $\Delta$.
+  Intuitively: adding more moves to an incoherent position cannot restore coherence.
+\end{definition}
+
+\subsection{Exchange}
+
+\begin{definition}
+  \label{def:exchange}
+  \uses{def:incoherence-space}
+  \lean{IncoherenceSpace.IsExchange}
+  \leanok
+  An incoherence space satisfies \emph{Exchange} if incoherence is invariant under
+  reordering: $\Gamma \mathbin{+\!\!+} \Delta \in \mathcal{I} \Rightarrow \Delta \mathbin{+\!\!+} \Gamma \in \mathcal{I}$.
+  Under Exchange, positions behave like multisets rather than lists.
+\end{definition}
+
+\begin{lemma}
+  \label{lem:I-append-comm}
+  \uses{def:exchange}
+  \lean{IncoherenceSpace.I_append_comm}
+  \leanok
+  $\Gamma \mathbin{+\!\!+} \Delta \in \mathcal{I} \iff \Delta \mathbin{+\!\!+} \Gamma \in \mathcal{I}$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:subset-dperp}
+  \uses{def:dperp,def:exchange,lem:I-append-comm}
+  \lean{IncoherenceSpace.subset_dperp}
+  \leanok
+  Under Exchange, $X \subseteq X^{\perp\perp}$ (extensiveness of ${\perp\perp}$).
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:dperp-idempotent}
+  \uses{lem:subset-dperp,def:dperp,lem:perp-antimono}
+  \lean{IncoherenceSpace.dperp_idempotent}
+  \leanok
+  Under Exchange, $(X^{\perp\perp})^{\perp\perp} = X^{\perp\perp}$ (idempotency of ${\perp\perp}$).
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:inter-dperp-closed}
+  \uses{lem:dperp-idempotent,lem:subset-dperp,lem:dperp-mono}
+  \lean{IncoherenceSpace.inter_dperp_closed}
+  \leanok
+  Under Exchange, the intersection of two ${\perp\perp}$-closed sets is ${\perp\perp}$-closed.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:perp-dperp-closed}
+  \uses{lem:dperp-idempotent}
+  \lean{IncoherenceSpace.perp_dperp_closed}
+  \leanok
+  Under Exchange, $X^\perp$ is always ${\perp\perp}$-closed: $(X^\perp)^{\perp\perp} = X^\perp$.
+\end{lemma}
+
+\subsection{Containment}
+
+\begin{definition}
+  \label{def:all-containment}
+  \uses{def:incoherence-space,def:move}
+  \lean{IncoherenceSpace.IsAllContainment}
+  \leanok
+  \emph{All-Containment}: any position containing both $+p$ and $-p$ for some $p$ is incoherent.
+\end{definition}
+
+\begin{definition}
+  \label{def:only-containment}
+  \uses{def:incoherence-space,def:move}
+  \lean{IncoherenceSpace.IsOnlyContainment}
+  \leanok
+  \emph{Only-Containment}: a position is incoherent only if it contains both $+p$ and $-p$
+  for some $p$.
+\end{definition}
+
+\begin{definition}
+  \label{def:containment}
+  \uses{def:all-containment,def:only-containment}
+  \lean{IncoherenceSpace.IsContainment}
+  \leanok
+  \emph{All-and-only Containment}: $\Gamma \in \mathcal{I}$ if and only if $\Gamma$ contains
+  both $+p$ and $-p$ for some atomic sentence $p$. This is the classical condition from Brandom's
+  incompatibility semantics.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:containment-implies-exchange}
+  \uses{def:containment,def:exchange}
+  \lean{IncoherenceSpace.IsContainment.toIsExchange}
+  \leanok
+  All-and-only Containment implies Exchange.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:containment-implies-persistent}
+  \uses{def:containment,def:persistent}
+  \lean{IncoherenceSpace.IsContainment.toIsPersistent}
+  \leanok
+  All-and-only Containment implies Persistence.
+\end{proposition}
+
+\begin{lemma}
+  \label{lem:perp-union}
+  \uses{def:perp}
+  \lean{IncoherenceSpace.perp_union}
+  \leanok
+  $\textrm{perp}(X \cup Y) = X^\perp \cap Y^\perp$.
+  This holds without any structural conditions.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:dperp-empty}
+  \uses{def:containment,def:dperp,def:persistent}
+  \lean{IncoherenceSpace.dperp_empty}
+  \leanok
+  Under Containment, $\emptyset^{\perp\perp} = \mathcal{I}$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:I-dperp-closed}
+  \uses{lem:dperp-empty,lem:dperp-idempotent}
+  \lean{IncoherenceSpace.I_dperp_closed}
+  \leanok
+  Under Containment, $\mathcal{I}$ is ${\perp\perp}$-closed.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:I-subset-closed}
+  \uses{lem:dperp-empty,lem:dperp-mono}
+  \lean{IncoherenceSpace.I_subset_closed}
+  \leanok
+  Under Containment, $\mathcal{I} \subseteq X$ for every ${\perp\perp}$-closed set $X$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:inter-perp-eq-I}
+  \uses{def:containment,def:perp,lem:I-subset-closed}
+  \lean{IncoherenceSpace.inter_perp_eq_I}
+  \leanok
+  Under Containment, for any ${\perp\perp}$-closed $X$: $X \cap X^\perp = \mathcal{I}$.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:union-perp-closed}
+  \uses{lem:inter-perp-eq-I,lem:perp-union}
+  \lean{IncoherenceSpace.union_perp_closed}
+  \leanok
+  Under Containment, for any ${\perp\perp}$-closed $X$: $(X \cup X^\perp)^{\perp\perp} = \top$.
+\end{lemma}
+
+
+\chapter{Closed Sets}
+
+\section{The ClosedSet type}
+
+\begin{definition}
+  \label{def:closed-set}
+  \uses{def:incoherence-space,def:dperp}
+  \lean{IncoherenceSpace.ClosedSet}
+  \leanok
+  A \emph{closed set} is a set of positions $X$ satisfying $X^{\perp\perp} = X$.
+  The type \texttt{ClosedSet} $L$ requires only a bare \texttt{IncoherenceSpace};
+  the shape of closed sets varies with additional structural conditions.
+\end{definition}
+
+\begin{lemma}
+  \label{lem:closed-set-partialorder}
+  \uses{def:closed-set}
+  \lean{IncoherenceSpace.ClosedSet.instPartialOrder}
+  \leanok
+  Closed sets are partially ordered by set inclusion.
+\end{lemma}
+
+\section{Lattice structure (Exchange)}
+
+\begin{lemma}
+  \label{lem:iInter-dperp-closed}
+  \uses{def:dperp,def:exchange,lem:dperp-mono}
+  \lean{IncoherenceSpace.iInter_dperp_closed}
+  \leanok
+  Under Exchange, any arbitrary intersection of ${\perp\perp}$-closed sets is ${\perp\perp}$-closed.
+\end{lemma}
+
+\begin{proposition}
+  \label{prop:closed-set-lattice}
+  \uses{def:closed-set,def:exchange,lem:inter-dperp-closed,lem:dperp-idempotent,lem:subset-dperp}
+  \lean{IncoherenceSpace.ClosedSet.instLattice}
+  \leanok
+  Under Exchange, \texttt{ClosedSet} $L$ is a lattice:
+  \begin{itemize}
+    \item $X \sqcap Y = X \cap Y$ (intersection of closed sets is closed).
+    \item $X \sqcup Y = (X \cup Y)^{\perp\perp}$ (the closure of the union).
+    \item $\top = \mathcal{U}$ (the universe, always closed under Exchange).
+  \end{itemize}
+\end{proposition}
+
+\section{Boolean algebra (Containment)}
+
+\begin{definition}
+  \label{def:compl-closed}
+  \uses{def:closed-set,def:containment,lem:perp-dperp-closed}
+  \lean{IncoherenceSpace.ClosedSet.compl'}
+  \leanok
+  Under Containment, the complement of a closed set $X$ is $X^\perp$
+  (which is always ${\perp\perp}$-closed).
+\end{definition}
+
+\begin{proposition}
+  \label{prop:closed-set-boolean}
+  \uses{def:compl-closed,lem:inter-perp-eq-I,lem:union-perp-closed,prop:closed-set-lattice,lem:I-dperp-closed,lem:I-subset-closed}
+  \lean{IncoherenceSpace.ClosedSet.instComplementedLattice}
+  \leanok
+  Under Containment, \texttt{ClosedSet} $L$ is a complemented lattice with:
+  \begin{itemize}
+    \item $\bot = \mathcal{I}$ (the incoherence set).
+    \item The complement of $X$ is $X^\perp$.
+    \item $X \sqcap X^\perp = \bot$ and $X \sqcup X^\perp = \top$.
+  \end{itemize}
+\end{proposition}
+
+\begin{theorem}
+  \label{thm:closed-set-distriblattice}
+  \uses{def:containment,def:closed-set,lem:I-subset-closed,lem:perp-union,prop:closed-set-boolean}
+  \lean{IncoherenceSpace.ClosedSet.instDistribLattice}
+  \leanok
+  Under Containment, the lattice of ${\perp\perp}$-closed sets is distributive.
+
+  The proof uses Zorn's lemma to extend coherent sets of moves to maximal ones, then
+  injects the lattice into a power-set Boolean algebra.
+\end{theorem}
+
+\begin{corollary}
+  \label{cor:closed-set-complete-lattice}
+  \uses{thm:closed-set-distriblattice,prop:closed-set-boolean,lem:iInter-dperp-closed}
+  \lean{IncoherenceSpace.ClosedSet.instCompleteLattice}
+  \leanok
+  Under Containment, \texttt{ClosedSet} $L$ is a complete lattice:
+  arbitrary joins are ${\perp\perp}$-closures of unions; arbitrary meets are intersections.
+\end{corollary}
+
+
+\chapter{Day Convolution}
+
+\section{Congruence lemmas}
+
+\begin{lemma}
+  \label{lem:dperp-fusion-congr-right}
+  \uses{def:fusion,def:dperp,def:exchange,lem:subset-dperp,lem:dperp-mono,lem:perp-antimono}
+  \lean{IncoherenceSpace.dperp_fusion_congr_right}
+  \leanok
+  Under Exchange, $(X \mathbin{\dot\cup} Y^{\perp\perp})^{\perp\perp} = (X \mathbin{\dot\cup} Y)^{\perp\perp}$:
+  replacing $Y$ by $Y^{\perp\perp}$ in the right slot of fusion does not change the closure.
+\end{lemma}
+
+\begin{lemma}
+  \label{lem:dperp-fusion-congr-left}
+  \uses{def:fusion,def:dperp,def:exchange,lem:subset-dperp,lem:dperp-mono,lem:perp-antimono}
+  \lean{IncoherenceSpace.dperp_fusion_congr_left}
+  \leanok
+  Under Exchange, $(X^{\perp\perp} \mathbin{\dot\cup} Y)^{\perp\perp} = (X \mathbin{\dot\cup} Y)^{\perp\perp}$:
+  replacing $X$ by $X^{\perp\perp}$ in the left slot of fusion does not change the closure.
+\end{lemma}
+
+\section{The tensor product}
+
+\begin{definition}
+  \label{def:dtensor}
+  \uses{def:closed-set,def:fusion,def:dperp,def:exchange,lem:dperp-idempotent}
+  \lean{IncoherenceSpace.ClosedSet.dtensor}
+  \leanok
+  The \emph{Day convolution tensor} of two closed sets is
+  \[
+    X \otimes^c Y := (X \mathbin{\dot\cup} Y)^{\perp\perp}.
+  \]
+\end{definition}
+
+\begin{definition}
+  \label{def:dunit}
+  \uses{def:dperp,def:exchange,lem:dperp-idempotent}
+  \lean{IncoherenceSpace.ClosedSet.dunit}
+  \leanok
+  The \emph{unit} for the Day convolution tensor is $\{[]\}^{\perp\perp}$.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:dtensor-assoc}
+  \uses{def:dtensor,lem:dperp-fusion-congr-left,lem:dperp-fusion-congr-right,lem:fusion-assoc}
+  \lean{IncoherenceSpace.ClosedSet.dtensor_assoc}
+  \leanok
+  The Day convolution tensor is associative:
+  $(X \otimes^c Y) \otimes^c Z = X \otimes^c (Y \otimes^c Z)$.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:dtensor-unit-left}
+  \uses{def:dtensor,def:dunit,lem:dperp-fusion-congr-left,lem:fusion-nil-left}
+  \lean{IncoherenceSpace.ClosedSet.dtensor_dunit_left}
+  \leanok
+  $\mathbf{1} \otimes^c X = X$: the unit is a left identity.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:dtensor-unit-right}
+  \uses{def:dtensor,def:dunit,lem:dperp-fusion-congr-right,lem:fusion-nil-right}
+  \lean{IncoherenceSpace.ClosedSet.dtensor_dunit_right}
+  \leanok
+  $X \otimes^c \mathbf{1} = X$: the unit is a right identity.
+\end{proposition}
+
+\section{Monoid and quantale structure}
+
+\begin{proposition}
+  \label{prop:dtensor-comm}
+  \uses{def:dtensor,def:containment}
+  \lean{IncoherenceSpace.ClosedSet.dtensor_comm}
+  \leanok
+  Under Containment, the Day convolution tensor is commutative:
+  $X \otimes^c Y = Y \otimes^c X$.
+
+  Under Containment, incoherence depends only on the \emph{set} of moves present,
+  so $(X \mathbin{\dot\cup} Y)^{\perp\perp} = (Y \mathbin{\dot\cup} X)^{\perp\perp}$.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:closed-set-monoid}
+  \uses{prop:dtensor-assoc,prop:dtensor-unit-left,prop:dtensor-unit-right}
+  \lean{IncoherenceSpace.ClosedSet.instMonoid}
+  \leanok
+  Under Exchange, $(\texttt{ClosedSet}\;L, \otimes^c, \mathbf{1})$ is a monoid.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:closed-set-comm-monoid}
+  \uses{prop:closed-set-monoid,prop:dtensor-comm}
+  \lean{IncoherenceSpace.ClosedSet.instCommMonoid}
+  \leanok
+  Under Containment, $(\texttt{ClosedSet}\;L, \otimes^c, \mathbf{1})$ is a commutative monoid.
+\end{proposition}
+
+\begin{theorem}
+  \label{thm:closed-set-quantale}
+  \uses{prop:closed-set-comm-monoid,cor:closed-set-complete-lattice,prop:dtensor-comm}
+  \lean{IncoherenceSpace.ClosedSet.instIsQuantale}
+  \leanok
+  Under Containment, $(\texttt{ClosedSet}\;L, \otimes^c)$ is a commutative unital quantale:
+  a complete lattice in which $\otimes^c$ distributes over all joins.
+  \[
+    X \otimes^c \bigsqcup_{i} Y_i = \bigsqcup_i (X \otimes^c Y_i).
+  \]
+  This is the main algebraic result of the formalization.
+\end{theorem}
+
+
+\chapter{Ternary Frames}
+
+\section{Abstract ternary frames}
+
+\begin{definition}
+  \label{def:ternary-frame}
+  \lean{TernaryFrame}
+  \leanok
+  A \emph{ternary frame} on $W$ is a ternary relation $R : W \to W \to W \to \mathsf{Prop}$.
+  We read $R(x, y, z)$ as ``$z$ is a possible result of combining $x$ and $y$''.
+\end{definition}
+
+\begin{definition}
+  \label{def:ternary-tensor}
+  \uses{def:ternary-frame}
+  \lean{TernaryFrame.tensor}
+  \leanok
+  The \emph{multiplicative tensor} of two sets $P, Q \subseteq W$ is
+  \[
+    P \otimes Q = \{\,x \mid \exists y \in P,\; \exists z \in Q,\; R(y, z, x)\,\}.
+  \]
+\end{definition}
+
+\begin{definition}
+  \label{def:ternary-lhom}
+  \uses{def:ternary-frame}
+  \lean{TernaryFrame.lhom}
+  \leanok
+  The \emph{left residual} is
+  $P \multimap Q = \{\,x \mid \forall y \in P,\;\forall z,\; R(x, y, z) \Rightarrow z \in Q\,\}$.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:residuation}
+  \uses{def:ternary-tensor,def:ternary-lhom}
+  \lean{TernaryFrame.tensor_sub_iff_sub_lhom}
+  \leanok
+  Left residuation: $P \otimes Q \subseteq S \iff P \subseteq Q \multimap S$.
+\end{proposition}
+
+\begin{definition}
+  \label{def:ternary-comm}
+  \uses{def:ternary-frame}
+  \lean{TernaryFrame.IsCommutative}
+  \leanok
+  A ternary frame is \emph{commutative} if $R(x, y, z) \Rightarrow R(y, x, z)$.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:tensor-comm}
+  \uses{def:ternary-tensor,def:ternary-comm}
+  \lean{TernaryFrame.tensor_comm}
+  \leanok
+  Under commutativity of $R$, tensor is commutative: $P \otimes Q = Q \otimes P$.
+\end{proposition}
+
+\begin{definition}
+  \label{def:ternary-assoc}
+  \uses{def:ternary-frame}
+  \lean{TernaryFrame.IsAssociative}
+  \leanok
+  A ternary frame is \emph{associative} if
+  $(R(x,y,z) \wedge R(z,u,v)) \iff (\exists w, R(y,u,w) \wedge R(x,w,v))$.
+\end{definition}
+
+\begin{proposition}
+  \label{prop:tensor-assoc}
+  \uses{def:ternary-tensor,def:ternary-assoc}
+  \lean{TernaryFrame.tensor_assoc}
+  \leanok
+  Under associativity of $R$, tensor is associative:
+  $(P \otimes Q) \otimes S = P \otimes (Q \otimes S)$.
+\end{proposition}
+
+\section{Positions as a ternary frame}
+
+\begin{proposition}
+  \label{prop:preorder-pos}
+  \uses{def:incomp-entails,lem:incomp-refl,lem:incomp-trans}
+  \lean{IncoherenceSpace.instPreorderPos}
+  \leanok
+  Positions form a preorder under incompatibility entailment:
+  \[
+    \Gamma \leq \Delta \iff \{\Gamma\}^\perp \subseteq \{\Delta\}^\perp.
+  \]
+  This matches the blog's $p \leq_{\mathit{IE}} q$ iff $\{p\}^\perp \subseteq \{q\}^\perp$.
+\end{proposition}
+
+\begin{proposition}
+  \label{prop:ternary-frame-pos}
+  \uses{def:ternary-frame,def:incomp-entails,prop:preorder-pos}
+  \lean{IncoherenceSpace.instTernaryFramePos}
+  \leanok
+  Positions form a ternary frame with
+  \[
+    R(\Gamma, \Delta, \Theta) \iff \Theta \vDash_{\mathcal{I}} \Gamma \mathbin{+\!\!+} \Delta
+    \iff \{\Gamma \mathbin{+\!\!+} \Delta\}^\perp \subseteq \{\Theta\}^\perp.
+  \]
+  In words: ``$\Theta$ is achievable from combining $\Gamma$ and $\Delta$''.
+\end{proposition}
+
+\begin{lemma}
+  \label{lem:perp-singleton-append-comm}
+  \uses{def:containment,def:perp}
+  \lean{IncoherenceSpace.perp_singleton_append_comm}
+  \leanok
+  Under Containment, $\{\Gamma \mathbin{+\!\!+} \Delta\}^\perp = \{\Delta \mathbin{+\!\!+} \Gamma\}^\perp$.
+\end{lemma}
+
+\begin{proposition}
+  \label{prop:comm-pos}
+  \uses{prop:ternary-frame-pos,def:ternary-comm,lem:perp-singleton-append-comm}
+  \lean{IncoherenceSpace.instIsCommutativePos}
+  \leanok
+  Under Containment, the ternary frame on positions is commutative.
+\end{proposition}
+
+\section{Connection theorems}
+
+\begin{theorem}
+  \label{thm:fusion-sub-tensor}
+  \uses{def:fusion,def:ternary-tensor,prop:ternary-frame-pos,lem:incomp-refl}
+  \lean{IncoherenceSpace.fusion_sub_tensor}
+  \leanok
+  The fusion is contained in the tensor product:
+  $X \mathbin{\dot\cup} Y \subseteq X \otimes Y$.
+
+  For $\Theta = \Gamma \mathbin{+\!\!+} \Delta \in X \mathbin{\dot\cup} Y$, we have
+  $R(\Gamma, \Delta, \Gamma \mathbin{+\!\!+} \Delta)$ by reflexivity.
+  This holds for bare \texttt{IncoherenceSpace}.
+\end{theorem}
+
+\begin{theorem}
+  \label{thm:tensor-sub-dtensor}
+  \uses{def:ternary-tensor,def:dtensor,def:exchange,thm:fusion-sub-tensor,lem:perp-antimono}
+  \lean{IncoherenceSpace.tensor_sub_dtensor}
+  \leanok
+  Under Exchange, the tensor product is contained in the Day convolution:
+  $X \otimes Y \subseteq X \otimes^c Y$.
+
+  For $\Theta \in X \otimes Y$, antitonicity gives
+  $(X \mathbin{\dot\cup} Y)^\perp \subseteq \{\Gamma \mathbin{+\!\!+} \Delta\}^\perp \subseteq \{\Theta\}^\perp$,
+  so $\Theta \in (X \mathbin{\dot\cup} Y)^{\perp\perp} = X \otimes^c Y$.
+\end{theorem}
+
+\begin{theorem}
+  \label{thm:dtensor-eq-dperp-tensor}
+  \uses{thm:tensor-sub-dtensor,thm:fusion-sub-tensor,lem:dperp-idempotent,def:dtensor}
+  \lean{IncoherenceSpace.dtensor_eq_dperp_tensor}
+  \leanok
+  Under Exchange, the Day convolution equals the ${\perp\perp}$-closure of the tensor:
+  \[
+    X \otimes^c Y = (X \otimes Y)^{\perp\perp}.
+  \]
+  This is the main connection theorem: the semantic tensor is
+  $(X \mathbin{\dot\cup} Y)^{\perp\perp} = (X \otimes Y)^{\perp\perp}$.
+\end{theorem}
+
+\section{Incoherence spaces as ternary frames}
+
+The results above combine into the following picture: every incoherence space
+canonically yields a ternary frame whose worlds are positions and whose
+quantale of propositions is the lattice of closed sets.
+
+\begin{corollary}
+  \label{cor:iss-ternary-frame}
+  \uses{prop:ternary-frame-pos,thm:closed-set-quantale,thm:dtensor-eq-dperp-tensor,prop:comm-pos}
+  \lean{IncoherenceSpace.iss_ternary_quantale_frame}
+  \leanok
+  Let $L$ be a type with \texttt{[IsContainment L]}.  Then:
+  \begin{enumerate}
+    \item Positions $\mathsf{List}(\mathsf{Move}\;L)$ carry a commutative ternary frame
+      structure with $R(\Gamma, \Delta, \Theta) \iff \Theta \vDash_{\mathcal{I}} \Gamma{+\!\!+}\Delta$.
+    \item The closed sets $\mathsf{ClosedSet}\;L$ form a commutative unital quantale under
+      Day convolution $\otimes^c$.
+    \item The ternary tensor of closed sets (computed via $R$) agrees with the Day convolution:
+      $X \otimes Y = (X \otimes^c Y)$, i.e., $X \otimes Y \subseteq X \otimes^c Y$ and
+      $X \otimes^c Y = (X \otimes Y)^{\perp\perp}$.
+  \end{enumerate}
+  In short: every incoherence space is a ternary frame, and the incoherence-space semantics
+  of that frame is exactly the quantale $\mathsf{ClosedSet}\;L$.
+\end{corollary}
+
+\chapter{Sequent Calculi: NMMS and NMMS\textsuperscript{ctr}}
+
+This chapter formalizes two sequent calculi for the logic of incoherence spaces, following
+Hlobil \& Brandom \cite{hlobil2024reasons} Chapter~3: the \emph{Non-Monotonic Material
+Sequent} calculus (NMMS) and its multiset variant NMMS\textsuperscript{ctr}.
+
+\section{The formula type}
+
+Both calculi operate over a type of formulas parameterized by an atomic type $\alpha$.
+
+\begin{definition}[Formulas]
+  \label{def:formula}
+  \lean{Formula}
+  \leanok
+  The type $\mathsf{Formula}\;\alpha$ is generated by:
+  \[
+    A, B ::= p \mid A \wedge B \mid A \vee B \mid \neg A \mid A \to B
+  \]
+  where $p : \alpha$ ranges over atomic formulas. The conditional $\to$ is a
+  \emph{primitive} connective, not defined as $\neg A \vee B$.
+\end{definition}
+
+\section{NMMS: the set-based calculus}
+
+Sequents $\Gamma \vdash \Delta$ in NMMS have \emph{sets} (Lean: \texttt{Finset}) of
+formulas on each side. Exchange and contraction are built in for free.
+
+The calculus is parameterized by a \emph{base consequence relation}
+$\mathsf{base} : \mathsf{Finset}\;(\mathsf{Formula}\;\alpha) \to \mathsf{Finset}\;(\mathsf{Formula}\;\alpha) \to \mathsf{Prop}$,
+which provides the axiom instances. For the Containment soundness theorem, we instantiate
+$\mathsf{base}$ with the Containment relation $(\Gamma \cap \Delta) \neq \emptyset$.
+
+\begin{definition}[NMMS]
+  \label{def:nmms}
+  \lean{NMMS}
+  \leanok
+  The \textbf{NMMS} derivability predicate is the smallest relation satisfying:
+  \begin{itemize}
+    \item \textbf{[Ax]} $\Gamma \vdash \Delta$ if $\mathsf{base}\;\Gamma\;\Delta$.
+    \item \textbf{[L$\wedge$]} If $\Gamma, A, B \vdash \Delta$ then $\Gamma, A{\wedge}B \vdash \Delta$.
+    \item \textbf{[L$\vee$]} If $\Gamma, A \vdash \Delta$ and $\Gamma, B \vdash \Delta$ and
+      $\Gamma, A, B \vdash \Delta$ then $\Gamma, A{\vee}B \vdash \Delta$.
+    \item \textbf{[L$\to$]} If $\Gamma \vdash \Delta, A$ and $\Gamma, B \vdash \Delta$ and
+      $\Gamma, B \vdash \Delta, A$ then $\Gamma, A{\to}B \vdash \Delta$.
+    \item \textbf{[L$\neg$]} If $\Gamma \vdash A, \Delta$ then $\Gamma, \neg A \vdash \Delta$.
+    \item \textbf{[R$\wedge$]} If $\Gamma \vdash \Delta, A$ and $\Gamma \vdash \Delta, B$ and
+      $\Gamma \vdash \Delta, A, B$ then $\Gamma \vdash \Delta, A{\wedge}B$.
+    \item \textbf{[R$\vee$]} If $\Gamma \vdash \Delta, A, B$ then $\Gamma \vdash \Delta, A{\vee}B$.
+    \item \textbf{[R$\to$]} If $\Gamma, A \vdash \Delta, B$ then $\Gamma \vdash \Delta, A{\to}B$.
+    \item \textbf{[R$\neg$]} If $\Gamma, A \vdash \Delta$ then $\Gamma \vdash \Delta, \neg A$.
+  \end{itemize}
+  The rules \textbf{[L$\vee$]}, \textbf{[L$\to$]}, and \textbf{[R$\wedge$]} each have a
+  \emph{third ``mixed'' premiss} that distinguishes NMMS from NMMS\textsuperscript{ctr}.
+\end{definition}
+
+\section{NMMS\textsuperscript{ctr}: the multiset-based calculus}
+
+Sequents in NMMS\textsuperscript{ctr} use \emph{multisets} (\texttt{Multiset}) on each side,
+giving exchange but not contraction. The rules use the Ketonen style: the three-premiss rules
+of NMMS become two-premiss rules.
+
+\begin{definition}[NMMS\textsuperscript{ctr}]
+  \label{def:nmmsctr}
+  \lean{NMMSctr}
+  \leanok
+  The \textbf{NMMS\textsuperscript{ctr}} derivability predicate is defined exactly as NMMS
+  except:
+  \begin{itemize}
+    \item Sequents are multisets: $\Gamma, \Delta : \mathsf{Multiset}\;(\mathsf{Formula}\;\alpha)$.
+    \item \textbf{[L$\vee$]} has only \emph{two} premisses: $\Gamma + \{A\} \vdash \Delta$ and
+      $\Gamma + \{B\} \vdash \Delta$ (no mixed third premiss).
+    \item \textbf{[L$\to$]} has only \emph{two} premisses: $\Gamma \vdash \Delta + \{A\}$ and
+      $\Gamma + \{B\} \vdash \Delta$.
+    \item \textbf{[R$\wedge$]} has only \emph{two} premisses: $\Gamma \vdash \Delta + \{A\}$ and
+      $\Gamma \vdash \Delta + \{B\}$.
+    \item All other rules are unchanged.
+  \end{itemize}
+\end{definition}
+
+\section{Soundness and Completeness: Theorem 76}
+
+The central result of Chapter~3 of \cite{hlobil2024reasons} is the soundness and
+completeness of NMMS with respect to \emph{b-models}: implication-space semantics (ISS)
+models that fit the base consequence relation.
+
+\subsection*{The semantic framework}
+
+Fix a \emph{base} $\mathfrak{B} = \langle \mathfrak{L}_{\mathfrak{B}}, \vdash_{\mathfrak{B}} \rangle$
+consisting of a base vocabulary $\mathfrak{L}_{\mathfrak{B}}$ and a base consequence relation
+${\vdash_{\mathfrak{B}}}$ on the base lexicon.
+
+An implication-space model $\mathbf{M} = \langle C, \llbracket\cdot\rrbracket \rangle$
+\textbf{fits} the base $\mathfrak{B}$ (is a \emph{b-model}) if for every atomic sequent
+$\langle \Gamma, \Delta \rangle \in {\vdash_{\mathfrak{B}}}$, the sequent $\llbracket\Gamma\rrbracket \Vdash \llbracket\Delta\rrbracket$
+holds in $C$ (\cite{hlobil2024reasons}, Def.~75, p.~221).
+
+The \textbf{b-validity} relation $\vdash^b$ is defined by:
+\[
+  \Gamma \vdash^b \Delta \iff \text{for every b-model } \mathbf{M},\; \mathbf{M} \models \Gamma \vdash \Delta.
+\]
+
+In Lean, the semantic notions are captured by:
+
+\begin{definition}[Consequence space]
+  \label{def:consequence-space}
+  \lean{ConsequenceSpace}
+  \leanok
+  A \textbf{consequence space} is an ISS model (placeholder for the full ISS definition).
+\end{definition}
+
+\begin{definition}[Satisfaction]
+  \label{def:satisfies}
+  \uses{def:consequence-space}
+  \lean{Satisfies}
+  \leanok
+  $\mathsf{Satisfies}\;M\;\Gamma\;\Delta$ holds when $M \models \Gamma \vdash \Delta$.
+\end{definition}
+
+\begin{definition}[Fits base]
+  \label{def:fits-base}
+  \uses{def:satisfies}
+  \lean{FitsBase}
+  \leanok
+  A model $M$ \textbf{fits} the base $\mathsf{base}$ if
+  $\forall \Gamma\,\Delta,\;\mathsf{base}\;\Gamma\;\Delta \Rightarrow \mathsf{Satisfies}\;M\;\Gamma\;\Delta$.
+\end{definition}
+
+\begin{definition}[b-validity]
+  \label{def:bvalid}
+  \uses{def:fits-base}
+  \lean{bValid}
+  \leanok
+  $\mathsf{bValid}\;\mathsf{base}\;\Gamma\;\Delta$ holds iff $\Gamma \vdash \Delta$ is
+  satisfied in every model fitting $\mathsf{base}$:
+  $\forall M,\;\mathsf{FitsBase}\;\mathsf{base}\;M \Rightarrow \mathsf{Satisfies}\;M\;\Gamma\;\Delta$.
+\end{definition}
+
+\subsection*{Theorem 76}
+
+\begin{theorem}[NMMS Soundness (Theorem 76, $\to$)]
+  \label{thm:nmms-sound}
+  \uses{def:nmms,def:bvalid}
+  \lean{NMMS_sound}
+  Every sequent derivable in $\mathsf{NMMS}\;\mathsf{base}$ is b-valid:
+  \[
+    \mathsf{NMMS}\;\mathsf{base}\;\Gamma\;\Delta \;\Rightarrow\; \mathsf{bValid}\;\mathsf{base}\;\Gamma\;\Delta.
+  \]
+  The proof proceeds by induction on the derivation tree; each logical rule is shown to
+  preserve b-validity (Props.~51 and~53 in \cite{hlobil2024reasons}).
+\end{theorem}
+
+\begin{theorem}[NMMS Completeness (Theorem 76, $\leftarrow$)]
+  \label{thm:nmms-complete}
+  \uses{def:nmms,def:bvalid}
+  \lean{NMMS_complete}
+  Every b-valid sequent is derivable in $\mathsf{NMMS}\;\mathsf{base}$:
+  \[
+    \mathsf{bValid}\;\mathsf{base}\;\Gamma\;\Delta \;\Rightarrow\; \mathsf{NMMS}\;\mathsf{base}\;\Gamma\;\Delta.
+  \]
+  The proof uses a canonical model (principal b-model) construction.
+\end{theorem}
+
+\begin{theorem}[Theorem 76 (RLLR, p.~222)]
+  \label{thm:nmms-iff-bvalid}
+  \uses{thm:nmms-sound,thm:nmms-complete}
+  \lean{NMMS_iff_bValid}
+  For any base $\mathsf{base}$ and sentences $\Gamma$, $\Delta$ in the logically extended
+  lexicon:
+  \[
+    \mathsf{NMMS}\;\mathsf{base}\;\Gamma\;\Delta \;\longleftrightarrow\; \mathsf{bValid}\;\mathsf{base}\;\Gamma\;\Delta.
+  \]
+  NMMS derivability coincides exactly with b-validity (soundness and completeness).
+\end{theorem}

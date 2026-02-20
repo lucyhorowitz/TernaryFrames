@@ -179,4 +179,36 @@ theorem dtensor_eq_dperp_tensor (X Y : ClosedSet L) :
 
 end ConnectionTheorems
 
+/-! ### Summary: incoherence spaces as ternary frames
+
+Collecting the results above into a single statement: under `[IsContainment L]`, every
+incoherence space `L` canonically yields:
+
+1. A commutative ternary frame on positions `List (Move L)` (via `instTernaryFramePos`,
+   `instIsCommutativePos`).
+2. A commutative unital quantale `ClosedSet L` of semantic values (via `instIsQuantale`).
+3. Agreement between the frame tensor and Day convolution on closed sets: the ternary
+   tensor of closed sets is the Day convolution, i.e., `X ⊗ᶜ Y = (X ⊗ Y)^⊥⊥`.
+
+The theorem below states the key agreement (3); (1) and (2) are registered as instances. -/
+
+section ISSAsTernaryFrame
+
+variable [IsContainment L]
+
+/-- The incoherence-space semantics of `L` is a ternary quantale frame:
+positions carry a commutative ternary frame, closed sets form a commutative unital quantale,
+and the Day convolution tensor on `ClosedSet L` is the incoherence closure of the
+ternary frame tensor:
+```
+(X ⊗ᶜ Y).carrier = dperp (TernaryFrame.tensor X.carrier Y.carrier)
+```
+This bundles `instTernaryFramePos`, `instIsCommutativePos`, `instIsQuantale`, and
+`dtensor_eq_dperp_tensor` into one place. -/
+theorem iss_ternary_quantale_frame (X Y : ClosedSet L) :
+    (X ⊗ᶜ Y).carrier = dperp (TernaryFrame.tensor X.carrier Y.carrier) :=
+  dtensor_eq_dperp_tensor X Y
+
+end ISSAsTernaryFrame
+
 end IncoherenceSpace

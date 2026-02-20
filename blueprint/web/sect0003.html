@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Day Convolution</title>
+<link rel="next" href="sect0004.html" title="Ternary Frames" />
+<link rel="prev" href="sect0002.html" title="Closed Sets" />
+<link rel="up" href="index.html" title="Incoherence-Space Semantics" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Incoherence-Space Semantics</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Incoherence Spaces</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000007"><span class="toc_ref">1.1</span> <span class="toc_entry">Moves and positions</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref">1.2</span> <span class="toc_entry">Incoherence profiles and closure</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000010"><span class="toc_ref">1.3</span> <span class="toc_entry">Fusion of positions</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000012"><span class="toc_ref">1.4</span> <span class="toc_entry">Structural conditions</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000013"><span class="toc_ref">1.4.1</span> <span class="toc_entry">Persistence</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000014"><span class="toc_ref">1.4.2</span> <span class="toc_entry">Exchange</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000015"><span class="toc_ref">1.4.3</span> <span class="toc_entry">Containment</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Closed Sets</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">2.1</span> <span class="toc_entry">The ClosedSet type</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">2.2</span> <span class="toc_entry">Lattice structure (Exchange)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000018"><span class="toc_ref">2.3</span> <span class="toc_entry">Boolean algebra (Containment)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Day Convolution</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0003.html#a0000000019"><span class="toc_ref">3.1</span> <span class="toc_entry">Congruence lemmas</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000020"><span class="toc_ref">3.2</span> <span class="toc_entry">The tensor product</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000021"><span class="toc_ref">3.3</span> <span class="toc_entry">Monoid and quantale structure</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Ternary Frames</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000022"><span class="toc_ref">4.1</span> <span class="toc_entry">Abstract ternary frames</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000023"><span class="toc_ref">4.2</span> <span class="toc_entry">Positions as a ternary frame</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000024"><span class="toc_ref">4.3</span> <span class="toc_entry">Connection theorems</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000025"><span class="toc_ref">4.4</span> <span class="toc_entry">Incoherence spaces as ternary frames</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Sequent Calculi: NMMS and NMMS<sup>ctr</sup></span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000026"><span class="toc_ref">5.1</span> <span class="toc_entry">The formula type</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000027"><span class="toc_ref">5.2</span> <span class="toc_entry">NMMS: the set-based calculus</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000028"><span class="toc_ref">5.3</span> <span class="toc_entry">NMMS<sup>ctr</sup>: the multiset-based calculus</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000029"><span class="toc_ref">5.4</span> <span class="toc_entry">Soundness and Completeness: Theorem 76</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">The semantic framework</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Theorem 76</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000004">3 Day Convolution</h1>
+<h1 id="a0000000019">3.1 Congruence lemmas</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:dperp-fusion-congr-right">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">40</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:dperp-fusion-congr-right">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:fusion">Definition 10</a></li>
+          
+          <li><a href="sect0001.html#def:dperp">Definition 4</a></li>
+          
+          <li><a href="sect0001.html#def:exchange">Definition 15</a></li>
+          
+          <li><a href="sect0001.html#lem:subset-dperp">Lemma 17</a></li>
+          
+          <li><a href="sect0001.html#lem:dperp-mono">Lemma 6</a></li>
+          
+          <li><a href="sect0001.html#lem:perp-antimono">Lemma 5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_fusion_congr_right" class="lean_decl">IncoherenceSpace.dperp_fusion_congr_right</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   Under Exchange, \((X \mathbin {\dot\cup } Y^{\perp \perp })^{\perp \perp } = (X \mathbin {\dot\cup } Y)^{\perp \perp }\): replacing \(Y\) by \(Y^{\perp \perp }\) in the right slot of fusion does not change the closure. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:dperp-fusion-congr-left">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">41</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#lem:dperp-fusion-congr-left">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:fusion">Definition 10</a></li>
+          
+          <li><a href="sect0001.html#def:dperp">Definition 4</a></li>
+          
+          <li><a href="sect0001.html#def:exchange">Definition 15</a></li>
+          
+          <li><a href="sect0001.html#lem:subset-dperp">Lemma 17</a></li>
+          
+          <li><a href="sect0001.html#lem:dperp-mono">Lemma 6</a></li>
+          
+          <li><a href="sect0001.html#lem:perp-antimono">Lemma 5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_fusion_congr_left" class="lean_decl">IncoherenceSpace.dperp_fusion_congr_left</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   Under Exchange, \((X^{\perp \perp } \mathbin {\dot\cup } Y)^{\perp \perp } = (X \mathbin {\dot\cup } Y)^{\perp \perp }\): replacing \(X\) by \(X^{\perp \perp }\) in the left slot of fusion does not change the closure. </p>
+
+  </div>
+</div>
+<h1 id="a0000000020">3.2 The tensor product</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:dtensor">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">42</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:dtensor">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0002.html#def:closed-set">Definition 32</a></li>
+          
+          <li><a href="sect0001.html#def:fusion">Definition 10</a></li>
+          
+          <li><a href="sect0001.html#def:dperp">Definition 4</a></li>
+          
+          <li><a href="sect0001.html#def:exchange">Definition 15</a></li>
+          
+          <li><a href="sect0001.html#lem:dperp-idempotent">Lemma 18</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor" class="lean_decl">IncoherenceSpace.ClosedSet.dtensor</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The <em>Day convolution tensor</em> of two closed sets is </p>
+<div class="displaymath" id="a0000000032">
+  \[  X \otimes ^c Y := (X \mathbin {\dot\cup } Y)^{\perp \perp }.  \]
+</div>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:dunit">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">43</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#def:dunit">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0001.html#def:dperp">Definition 4</a></li>
+          
+          <li><a href="sect0001.html#def:exchange">Definition 15</a></li>
+          
+          <li><a href="sect0001.html#lem:dperp-idempotent">Lemma 18</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dunit" class="lean_decl">IncoherenceSpace.ClosedSet.dunit</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The <em>unit</em> for the Day convolution tensor is \(\{ []\} ^{\perp \perp }\). </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:dtensor-assoc">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">44</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:dtensor-assoc">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:dtensor">Definition 42</a></li>
+          
+          <li><a href="sect0003.html#lem:dperp-fusion-congr-left">Lemma 41</a></li>
+          
+          <li><a href="sect0003.html#lem:dperp-fusion-congr-right">Lemma 40</a></li>
+          
+          <li><a href="sect0001.html#lem:fusion-assoc">Lemma 11</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_assoc" class="lean_decl">IncoherenceSpace.ClosedSet.dtensor_assoc</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   The Day convolution tensor is associative: \((X \otimes ^c Y) \otimes ^c Z = X \otimes ^c (Y \otimes ^c Z)\). </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:dtensor-unit-left">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">45</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:dtensor-unit-left">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:dtensor">Definition 42</a></li>
+          
+          <li><a href="sect0003.html#def:dunit">Definition 43</a></li>
+          
+          <li><a href="sect0003.html#lem:dperp-fusion-congr-left">Lemma 41</a></li>
+          
+          <li><a href="sect0001.html#lem:fusion-nil-left">Lemma 12</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_dunit_left" class="lean_decl">IncoherenceSpace.ClosedSet.dtensor_dunit_left</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   \(\mathbf{1} \otimes ^c X = X\): the unit is a left identity. </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:dtensor-unit-right">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">46</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:dtensor-unit-right">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:dtensor">Definition 42</a></li>
+          
+          <li><a href="sect0003.html#def:dunit">Definition 43</a></li>
+          
+          <li><a href="sect0003.html#lem:dperp-fusion-congr-right">Lemma 40</a></li>
+          
+          <li><a href="sect0001.html#lem:fusion-nil-right">Lemma 13</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_dunit_right" class="lean_decl">IncoherenceSpace.ClosedSet.dtensor_dunit_right</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   \(X \otimes ^c \mathbf{1} = X\): the unit is a right identity. </p>
+
+  </div>
+</div>
+<h1 id="a0000000021">3.3 Monoid and quantale structure</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:dtensor-comm">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">47</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:dtensor-comm">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#def:dtensor">Definition 42</a></li>
+          
+          <li><a href="sect0001.html#def:containment">Definition 23</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_comm" class="lean_decl">IncoherenceSpace.ClosedSet.dtensor_comm</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   Under Containment, the Day convolution tensor is commutative: \(X \otimes ^c Y = Y \otimes ^c X\). </p>
+<p>Under Containment, incoherence depends only on the <em>set</em> of moves present, so \((X \mathbin {\dot\cup } Y)^{\perp \perp } = (Y \mathbin {\dot\cup } X)^{\perp \perp }\). </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:closed-set-monoid">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">48</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:closed-set-monoid">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#prop:dtensor-assoc">Proposition 44</a></li>
+          
+          <li><a href="sect0003.html#prop:dtensor-unit-left">Proposition 45</a></li>
+          
+          <li><a href="sect0003.html#prop:dtensor-unit-right">Proposition 46</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instMonoid" class="lean_decl">IncoherenceSpace.ClosedSet.instMonoid</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   Under Exchange, \((\texttt{ClosedSet}\; L, \otimes ^c, \mathbf{1})\) is a monoid. </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:closed-set-comm-monoid">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">49</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#prop:closed-set-comm-monoid">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#prop:closed-set-monoid">Proposition 48</a></li>
+          
+          <li><a href="sect0003.html#prop:dtensor-comm">Proposition 47</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instCommMonoid" class="lean_decl">IncoherenceSpace.ClosedSet.instCommMonoid</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>   Under Containment, \((\texttt{ClosedSet}\; L, \otimes ^c, \mathbf{1})\) is a commutative monoid. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:closed-set-quantale">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">50</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0003.html#thm:closed-set-quantale">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0003.html#prop:closed-set-comm-monoid">Proposition 49</a></li>
+          
+          <li><a href="sect0002.html#cor:closed-set-complete-lattice">Corollary 39</a></li>
+          
+          <li><a href="sect0003.html#prop:dtensor-comm">Proposition 47</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instIsQuantale" class="lean_decl">IncoherenceSpace.ClosedSet.instIsQuantale</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Under Containment, \((\texttt{ClosedSet}\; L, \otimes ^c)\) is a commutative unital quantale: a complete lattice in which \(\otimes ^c\) distributes over all joins. </p>
+<div class="displaymath" id="a0000000033">
+  \[  X \otimes ^c \bigsqcup _{i} Y_i = \bigsqcup _i (X \otimes ^c Y_i).  \]
+</div>
+<p> This is the main algebraic result of the formalization. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0002.html" title="Closed Sets"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Incoherence-Space Semantics"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0004.html" title="Ternary Frames"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sequent Calculi: NMMS and NMMS<sup>ctr</sup></title>
+<link rel="prev" href="sect0004.html" title="Ternary Frames" />
+<link rel="up" href="index.html" title="Incoherence-Space Semantics" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Incoherence-Space Semantics</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref">1</span> <span class="toc_entry">Incoherence Spaces</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000007"><span class="toc_ref">1.1</span> <span class="toc_entry">Moves and positions</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000008"><span class="toc_ref">1.2</span> <span class="toc_entry">Incoherence profiles and closure</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000010"><span class="toc_ref">1.3</span> <span class="toc_entry">Fusion of positions</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000012"><span class="toc_ref">1.4</span> <span class="toc_entry">Structural conditions</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000013"><span class="toc_ref">1.4.1</span> <span class="toc_entry">Persistence</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000014"><span class="toc_ref">1.4.2</span> <span class="toc_entry">Exchange</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000015"><span class="toc_ref">1.4.3</span> <span class="toc_entry">Containment</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref">2</span> <span class="toc_entry">Closed Sets</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000016"><span class="toc_ref">2.1</span> <span class="toc_entry">The ClosedSet type</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000017"><span class="toc_ref">2.2</span> <span class="toc_entry">Lattice structure (Exchange)</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000018"><span class="toc_ref">2.3</span> <span class="toc_entry">Boolean algebra (Containment)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref">3</span> <span class="toc_entry">Day Convolution</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000019"><span class="toc_ref">3.1</span> <span class="toc_entry">Congruence lemmas</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000020"><span class="toc_ref">3.2</span> <span class="toc_entry">The tensor product</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000021"><span class="toc_ref">3.3</span> <span class="toc_entry">Monoid and quantale structure</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref">4</span> <span class="toc_entry">Ternary Frames</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000022"><span class="toc_ref">4.1</span> <span class="toc_entry">Abstract ternary frames</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000023"><span class="toc_ref">4.2</span> <span class="toc_entry">Positions as a ternary frame</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000024"><span class="toc_ref">4.3</span> <span class="toc_entry">Connection theorems</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000025"><span class="toc_ref">4.4</span> <span class="toc_entry">Incoherence spaces as ternary frames</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0005.html"><span class="toc_ref">5</span> <span class="toc_entry">Sequent Calculi: NMMS and NMMS<sup>ctr</sup></span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0005.html#a0000000026"><span class="toc_ref">5.1</span> <span class="toc_entry">The formula type</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000027"><span class="toc_ref">5.2</span> <span class="toc_entry">NMMS: the set-based calculus</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000028"><span class="toc_ref">5.3</span> <span class="toc_entry">NMMS<sup>ctr</sup>: the multiset-based calculus</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000029"><span class="toc_ref">5.4</span> <span class="toc_entry">Soundness and Completeness: Theorem 76</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000030"><span class="toc_ref"></span> <span class="toc_entry">The semantic framework</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Theorem 76</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000006">5 Sequent Calculi: NMMS and NMMS<sup>ctr</sup></h1>
+<p>This chapter formalizes two sequent calculi for the logic of incoherence spaces, following Hlobil &amp; Brandom <span class="cite">
+	[
+</span> Chapter&#160;3: the <em>Non-Monotonic Material Sequent</em> calculus (NMMS) and its multiset variant NMMS<sup>ctr</sup>. </p>
+<h1 id="a0000000026">5.1 The formula type</h1>
+<p>Both calculi operate over a type of formulas parameterized by an atomic type \(\alpha \). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:formula">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">67</span>
+    <span class="definition_thmtitle">Formulas</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:formula">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/Formula" class="lean_decl">Formula</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The type \(\mathsf{Formula}\; \alpha \) is generated by: </p>
+<div class="displaymath" id="a0000000038">
+  \[  A, B ::= p \mid A \wedge B \mid A \vee B \mid \neg A \mid A \to B  \]
+</div>
+<p> where \(p : \alpha \) ranges over atomic formulas. The conditional \(\to \) is a <em>primitive</em> connective, not defined as \(\neg A \vee B\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000027">5.2 NMMS: the set-based calculus</h1>
+<p>Sequents \(\Gamma \vdash \Delta \) in NMMS have <em>sets</em> (Lean: <span class="ttfamily">Finset</span>) of formulas on each side. Exchange and contraction are built in for free. </p>
+<p>The calculus is parameterized by a <em>base consequence relation</em> \(\mathsf{base} : \mathsf{Finset}\; (\mathsf{Formula}\; \alpha ) \to \mathsf{Finset}\; (\mathsf{Formula}\; \alpha ) \to \mathsf{Prop}\), which provides the axiom instances. For the Containment soundness theorem, we instantiate \(\mathsf{base}\) with the Containment relation \((\Gamma \cap \Delta ) \neq \emptyset \). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:nmms">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">68</span>
+    <span class="definition_thmtitle">NMMS</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:nmms">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS" class="lean_decl">NMMS</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The <b class="bfseries">NMMS</b> derivability predicate is the smallest relation satisfying: </p>
+<ul class="itemize">
+  <li><p><b class="bfseries">[Ax]</b> \(\Gamma \vdash \Delta \) if \(\mathsf{base}\; \Gamma \; \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\wedge \)]</b> If \(\Gamma , A, B \vdash \Delta \) then \(\Gamma , A{\wedge }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\vee \)]</b> If \(\Gamma , A \vdash \Delta \) and \(\Gamma , B \vdash \Delta \) and \(\Gamma , A, B \vdash \Delta \) then \(\Gamma , A{\vee }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\to \)]</b> If \(\Gamma \vdash \Delta , A\) and \(\Gamma , B \vdash \Delta \) and \(\Gamma , B \vdash \Delta , A\) then \(\Gamma , A{\to }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\neg \)]</b> If \(\Gamma \vdash A, \Delta \) then \(\Gamma , \neg A \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\wedge \)]</b> If \(\Gamma \vdash \Delta , A\) and \(\Gamma \vdash \Delta , B\) and \(\Gamma \vdash \Delta , A, B\) then \(\Gamma \vdash \Delta , A{\wedge }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\vee \)]</b> If \(\Gamma \vdash \Delta , A, B\) then \(\Gamma \vdash \Delta , A{\vee }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\to \)]</b> If \(\Gamma , A \vdash \Delta , B\) then \(\Gamma \vdash \Delta , A{\to }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\neg \)]</b> If \(\Gamma , A \vdash \Delta \) then \(\Gamma \vdash \Delta , \neg A\). </p>
+</li>
+</ul>
+<p> The rules <b class="bfseries">[L\(\vee \)]</b>, <b class="bfseries">[L\(\to \)]</b>, and <b class="bfseries">[R\(\wedge \)]</b> each have a <em>third “mixed” premiss</em> that distinguishes NMMS from NMMS<sup>ctr</sup>. </p>
+
+  </div>
+</div>
+<h1 id="a0000000028">5.3 NMMS<sup>ctr</sup>: the multiset-based calculus</h1>
+<p>Sequents in NMMS<sup>ctr</sup> use <em>multisets</em> (<span class="ttfamily">Multiset</span>) on each side, giving exchange but not contraction. The rules use the Ketonen style: the three-premiss rules of NMMS become two-premiss rules. </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:nmmsctr">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">69</span>
+    <span class="definition_thmtitle">NMMS<sup>ctr</sup></span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:nmmsctr">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMSctr" class="lean_decl">NMMSctr</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   The <b class="bfseries">NMMS<sup>ctr</sup></b> derivability predicate is defined exactly as NMMS except: </p>
+<ul class="itemize">
+  <li><p>Sequents are multisets: \(\Gamma , \Delta : \mathsf{Multiset}\; (\mathsf{Formula}\; \alpha )\). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\vee \)]</b> has only <em>two</em> premisses: \(\Gamma + \{ A\}  \vdash \Delta \) and \(\Gamma + \{ B\}  \vdash \Delta \) (no mixed third premiss). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\to \)]</b> has only <em>two</em> premisses: \(\Gamma \vdash \Delta + \{ A\} \) and \(\Gamma + \{ B\}  \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\wedge \)]</b> has only <em>two</em> premisses: \(\Gamma \vdash \Delta + \{ A\} \) and \(\Gamma \vdash \Delta + \{ B\} \). </p>
+</li>
+  <li><p>All other rules are unchanged. </p>
+</li>
+</ul>
+
+  </div>
+</div>
+<h1 id="a0000000029">5.4 Soundness and Completeness: Theorem 76</h1>
+<p>The central result of Chapter&#160;3 of <span class="cite">
+	[
+</span> is the soundness and completeness of NMMS with respect to <em>b-models</em>: implication-space semantics (ISS) models that fit the base consequence relation. </p>
+<h2 id="a0000000030">The semantic framework</h2>
+<p>Fix a <em>base</em> \(\mathfrak {B} = \langle \mathfrak {L}_{\mathfrak {B}}, \vdash _{\mathfrak {B}} \rangle \) consisting of a base vocabulary \(\mathfrak {L}_{\mathfrak {B}}\) and a base consequence relation \({\vdash _{\mathfrak {B}}}\) on the base lexicon. </p>
+<p>An implication-space model \(\mathbf{M} = \langle C, \llbracket \cdot \rrbracket \rangle \) <b class="bfseries">fits</b> the base \(\mathfrak {B}\) (is a <em>b-model</em>) if for every atomic sequent \(\langle \Gamma , \Delta \rangle \in {\vdash _{\mathfrak {B}}}\), the sequent \(\llbracket \Gamma \rrbracket \Vdash \llbracket \Delta \rrbracket \) holds in \(C\) (<span class="cite">
+	[
+</span>, Def.&#160;75, p.&#160;221). </p>
+<p>The <b class="bfseries">b-validity</b> relation \(\vdash ^b\) is defined by: </p>
+<div class="displaymath" id="a0000000039">
+  \[  \Gamma \vdash ^b \Delta \iff \text{for every b-model } \mathbf{M},\;  \mathbf{M} \models \Gamma \vdash \Delta .  \]
+</div>
+<p>In Lean, the semantic notions are captured by: </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:consequence-space">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">70</span>
+    <span class="definition_thmtitle">Consequence space</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:consequence-space">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/ConsequenceSpace" class="lean_decl">ConsequenceSpace</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   A <b class="bfseries">consequence space</b> is an ISS model (placeholder for the full ISS definition). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:satisfies">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">71</span>
+    <span class="definition_thmtitle">Satisfaction</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:satisfies">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:consequence-space">Definition 70</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/Satisfies" class="lean_decl">Satisfies</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    \(\mathsf{Satisfies}\; M\; \Gamma \; \Delta \) holds when \(M \models \Gamma \vdash \Delta \). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:fits-base">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">72</span>
+    <span class="definition_thmtitle">Fits base</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:fits-base">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:satisfies">Definition 71</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/FitsBase" class="lean_decl">FitsBase</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    A model \(M\) <b class="bfseries">fits</b> the base \(\mathsf{base}\) if \(\forall \Gamma \, \Delta ,\; \mathsf{base}\; \Gamma \; \Delta \Rightarrow \mathsf{Satisfies}\; M\; \Gamma \; \Delta \). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:bvalid">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">73</span>
+    <span class="definition_thmtitle">b-validity</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#def:bvalid">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:fits-base">Definition 72</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/bValid" class="lean_decl">bValid</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>    \(\mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta \) holds iff \(\Gamma \vdash \Delta \) is satisfied in every model fitting \(\mathsf{base}\): \(\forall M,\; \mathsf{FitsBase}\; \mathsf{base}\; M \Rightarrow \mathsf{Satisfies}\; M\; \Gamma \; \Delta \). </p>
+
+  </div>
+</div>
+<h2 id="a0000000031">Theorem 76</h2>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nmms-sound">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">74</span>
+    <span class="theorem_thmtitle">NMMS Soundness (Theorem 76, \(\to \))</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:nmms-sound">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:nmms">Definition 68</a></li>
+          
+          <li><a href="sect0005.html#def:bvalid">Definition 73</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_sound" class="lean_decl">NMMS_sound</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Every sequent derivable in \(\mathsf{NMMS}\; \mathsf{base}\) is b-valid: </p>
+<div class="displaymath" id="a0000000040">
+  \[  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta \; \Rightarrow \;  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> The proof proceeds by induction on the derivation tree; each logical rule is shown to preserve b-validity (Props.&#160;51 and&#160;53 in <span class="cite">
+	[
+</span>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nmms-complete">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">75</span>
+    <span class="theorem_thmtitle">NMMS Completeness (Theorem 76, \(\leftarrow \))</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:nmms-complete">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#def:nmms">Definition 68</a></li>
+          
+          <li><a href="sect0005.html#def:bvalid">Definition 73</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_complete" class="lean_decl">NMMS_complete</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Every b-valid sequent is derivable in \(\mathsf{NMMS}\; \mathsf{base}\): </p>
+<div class="displaymath" id="a0000000041">
+  \[  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta \; \Rightarrow \;  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> The proof uses a canonical model (principal b-model) construction. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nmms-iff-bvalid">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">76</span>
+    <span class="theorem_thmtitle">Theorem 76 (RLLR, p.&#160;222)</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#thm:nmms-iff-bvalid">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sect0005.html#thm:nmms-sound">Theorem 74</a></li>
+          
+          <li><a href="sect0005.html#thm:nmms-complete">Theorem 75</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_iff_bValid" class="lean_decl">NMMS_iff_bValid</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    For any base \(\mathsf{base}\) and sentences \(\Gamma \), \(\Delta \) in the logically extended lexicon: </p>
+<div class="displaymath" id="a0000000042">
+  \[  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta \; \longleftrightarrow \;  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> NMMS derivability coincides exactly with b-validity (soundness and completeness). </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0004.html" title="Ternary Frames"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Incoherence-Space Semantics"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

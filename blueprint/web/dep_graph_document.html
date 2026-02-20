@@ -1,0 +1,2513 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dependency graph</title>
+  <meta name="generator" content="plasTeX" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/theme-white.css" />
+  <link rel="stylesheet" href="styles/dep_graph.css" />
+  
+  <script type="text/x-mathjax-config">
+  
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  
+  </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">  </script>
+
+
+<link rel="stylesheet" href="styles/extra_styles.css" />
+
+</head>
+
+<body>
+<header>
+  <a class="toc" href="index.html">Home</a>
+  <h1 id="doc_title">Dependencies</h1>
+</header>
+<div class="wrapper">
+<div class="content">
+  <div id="Legend">
+    <span id="legend_title" class="title">Legend
+    <div class="btn">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+    </div></span> 
+    <dl class="legend">
+      
+      <dt>Boxes</dt><dd>definitions</dd>
+      
+      <dt>Ellipses</dt><dd>theorems and lemmas</dd>
+      
+      <dt>Blue border</dt><dd>the <em>statement</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Orange border</dt><dd>the <em>statement</em> of this result is not ready to be formalized; the blueprint needs more work</dd>
+      
+      <dt>Blue background</dt><dd>the <em>proof</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Green border</dt><dd>the <em>statement</em> of this result is formalized</dd>
+      
+      <dt>Green background</dt><dd>the <em>proof</em> of this result is formalized</dd>
+      
+      <dt>Dark green background</dt><dd>the <em>proof</em> of this result and all its ancestors are formalized</dd>
+      
+      <dt>Dark green border</dt><dd>this is in Mathlib</dd>
+      
+    </dl>
+  </div>
+    <div id="graph"></div>
+<div id="statements">
+
+    
+    <div class="dep-modal-container" id="cor:closed-set-complete-lattice_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="cor:closed-set-complete-lattice" style="display: none">
+    <div class="thm_thmheading">
+      <span class="corollary_thmcaption">
+      Corollary
+      </span>
+      <span class="corollary_thmlabel">39</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, <span class="ttfamily">ClosedSet</span> \(L\) is a complete lattice: arbitrary joins are \({\perp \perp }\)-closures of unions; arbitrary meets are intersections. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#cor:closed-set-complete-lattice">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instCompleteLattice">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="cor:iss-ternary-frame_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="cor:iss-ternary-frame" style="display: none">
+    <div class="thm_thmheading">
+      <span class="corollary_thmcaption">
+      Corollary
+      </span>
+      <span class="corollary_thmlabel">66</span></div>
+    <div class="thm_thmcontent"><p>   Let \(L\) be a type with <span class="ttfamily">[IsContainment L]</span>. Then: </p>
+<ol class="enumerate">
+  <li><p>Positions \(\mathsf{List}(\mathsf{Move}\; L)\) carry a commutative ternary frame structure with \(R(\Gamma , \Delta , \Theta ) \iff \Theta \vDash _{\mathcal{I}} \Gamma {+\! \! +}\Delta \). </p>
+</li>
+  <li><p>The closed sets \(\mathsf{ClosedSet}\; L\) form a commutative unital quantale under Day convolution \(\otimes ^c\). </p>
+</li>
+  <li><p>The ternary tensor of closed sets (computed via \(R\)) agrees with the Day convolution: \(X \otimes Y = (X \otimes ^c Y)\), i.e., \(X \otimes Y \subseteq X \otimes ^c Y\) and \(X \otimes ^c Y = (X \otimes Y)^{\perp \perp }\). </p>
+</li>
+</ol>
+<p> In short: every incoherence space is a ternary frame, and the incoherence-space semantics of that frame is exactly the quantale \(\mathsf{ClosedSet}\; L\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#cor:iss-ternary-frame">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.iss_ternary_quantale_frame">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:all-containment_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:all-containment" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">21</span></div>
+    <div class="thm_thmcontent"><p>   <em>All-Containment</em>: any position containing both \(+p\) and \(-p\) for some \(p\) is incoherent. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:all-containment">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsAllContainment">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:bvalid_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:bvalid" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">73</span><span class="definition_thmtitle">b-validity</span></div>
+    <div class="thm_thmcontent"><p>    \(\mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta \) holds iff \(\Gamma \vdash \Delta \) is satisfied in every model fitting \(\mathsf{base}\): \(\forall M,\; \mathsf{FitsBase}\; \mathsf{base}\; M \Rightarrow \mathsf{Satisfies}\; M\; \Gamma \; \Delta \). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:bvalid">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/bValid">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:closed-set_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:closed-set" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">32</span></div>
+    <div class="thm_thmcontent"><p>   A <em>closed set</em> is a set of positions \(X\) satisfying \(X^{\perp \perp } = X\). The type <span class="ttfamily">ClosedSet</span> \(L\) requires only a bare <span class="ttfamily">IncoherenceSpace</span>; the shape of closed sets varies with additional structural conditions. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:closed-set">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:compl-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:compl-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">36</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, the complement of a closed set \(X\) is \(X^\perp \) (which is always \({\perp \perp }\)-closed). </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#def:compl-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.compl'">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:consequence-space_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:consequence-space" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">70</span><span class="definition_thmtitle">Consequence space</span></div>
+    <div class="thm_thmcontent"><p>   A <b class="bfseries">consequence space</b> is an ISS model (placeholder for the full ISS definition). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:consequence-space">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/ConsequenceSpace">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:containment_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:containment" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">23</span></div>
+    <div class="thm_thmcontent"><p>   <em>All-and-only Containment</em>: \(\Gamma \in \mathcal{I}\) if and only if \(\Gamma \) contains both \(+p\) and \(-p\) for some atomic sentence \(p\). This is the classical condition from Brandom’s incompatibility semantics. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:containment">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsContainment">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:dperp_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:dperp" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">4</span></div>
+    <div class="thm_thmcontent"><p>   The <em>incoherence closure</em> is \(X^{\perp \perp } = (X^\perp )^\perp \): the set of positions that incompatibility-entail \(X\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:dperp">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:dtensor_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:dtensor" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">42</span></div>
+    <div class="thm_thmcontent"><p>   The <em>Day convolution tensor</em> of two closed sets is </p>
+<div class="displaymath" id="a0000000032">
+  \[  X \otimes ^c Y := (X \mathbin {\dot\cup } Y)^{\perp \perp }.  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0003.html#def:dtensor">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:dunit_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:dunit" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">43</span></div>
+    <div class="thm_thmcontent"><p>   The <em>unit</em> for the Day convolution tensor is \(\{ []\} ^{\perp \perp }\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#def:dunit">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dunit">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:exchange_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:exchange" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">15</span></div>
+    <div class="thm_thmcontent"><p>   An incoherence space satisfies <em>Exchange</em> if incoherence is invariant under reordering: \(\Gamma \mathbin {+\! \! +} \Delta \in \mathcal{I} \Rightarrow \Delta \mathbin {+\! \! +} \Gamma \in \mathcal{I}\). Under Exchange, positions behave like multisets rather than lists. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:exchange">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsExchange">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:fits-base_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:fits-base" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">72</span><span class="definition_thmtitle">Fits base</span></div>
+    <div class="thm_thmcontent"><p>    A model \(M\) <b class="bfseries">fits</b> the base \(\mathsf{base}\) if \(\forall \Gamma \, \Delta ,\; \mathsf{base}\; \Gamma \; \Delta \Rightarrow \mathsf{Satisfies}\; M\; \Gamma \; \Delta \). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:fits-base">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/FitsBase">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:formula_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:formula" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">67</span><span class="definition_thmtitle">Formulas</span></div>
+    <div class="thm_thmcontent"><p>   The type \(\mathsf{Formula}\; \alpha \) is generated by: </p>
+<div class="displaymath" id="a0000000038">
+  \[  A, B ::= p \mid A \wedge B \mid A \vee B \mid \neg A \mid A \to B  \]
+</div>
+<p> where \(p : \alpha \) ranges over atomic formulas. The conditional \(\to \) is a <em>primitive</em> connective, not defined as \(\neg A \vee B\). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:formula">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/Formula">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:fusion_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:fusion" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">10</span></div>
+    <div class="thm_thmcontent"><p>   The <em>fusion</em> of two sets of positions is </p>
+<div class="displaymath" id="a0000000011">
+  \[  X \mathbin {\dot\cup } Y = \{ \, \Gamma \mathbin {+\! \! +} \Delta \mid \Gamma \in X,\;  \Delta \in Y\, \} .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:fusion">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.fusion">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:incoherence-space_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:incoherence-space" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2</span></div>
+    <div class="thm_thmcontent"><p>   An <em>incoherence space</em> on a language \(L\) is a set \(\mathcal{I}\) of <em>incoherent</em> positions satisfying: </p>
+<ul class="itemize">
+  <li><p>The empty position is coherent: \([] \notin \mathcal{I}\). </p>
+</li>
+</ul>
+<p> Persistence (\(\Gamma \in \mathcal{I} \Rightarrow \Gamma \mathbin {+\! \! +} \Delta \in \mathcal{I}\)) is <em>not</em> assumed, enabling defeasible material incompatibilities. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:incoherence-space">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:incomp-entails_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:incomp-entails" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">7</span></div>
+    <div class="thm_thmcontent"><p>   <em>Incompatibility entailment</em>: \(\Delta \vDash _{\mathcal{I}} \Gamma \) when \(\{ \Gamma \} ^\perp \subseteq \{ \Delta \} ^\perp \), i.e., everything incompatible with \(\Gamma \) is also incompatible with \(\Delta \). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:incomp-entails">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IncompEntails">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:move_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:move" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1</span></div>
+    <div class="thm_thmcontent"><p>  A <em>move</em> over a language \(L\) is a signed sentence: either an assertion \(+A\) (written <span class="ttfamily">Move.assert</span> \(A\)) or a denial \(-A\) (written <span class="ttfamily">Move.deny</span> \(A\)). A <em>position</em> is a list of moves, <span class="ttfamily">List (Move</span> \(L\)<span class="ttfamily">)</span>. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:move">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/Move">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:nmms_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:nmms" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">68</span><span class="definition_thmtitle">NMMS</span></div>
+    <div class="thm_thmcontent"><p>   The <b class="bfseries">NMMS</b> derivability predicate is the smallest relation satisfying: </p>
+<ul class="itemize">
+  <li><p><b class="bfseries">[Ax]</b> \(\Gamma \vdash \Delta \) if \(\mathsf{base}\; \Gamma \; \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\wedge \)]</b> If \(\Gamma , A, B \vdash \Delta \) then \(\Gamma , A{\wedge }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\vee \)]</b> If \(\Gamma , A \vdash \Delta \) and \(\Gamma , B \vdash \Delta \) and \(\Gamma , A, B \vdash \Delta \) then \(\Gamma , A{\vee }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\to \)]</b> If \(\Gamma \vdash \Delta , A\) and \(\Gamma , B \vdash \Delta \) and \(\Gamma , B \vdash \Delta , A\) then \(\Gamma , A{\to }B \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\neg \)]</b> If \(\Gamma \vdash A, \Delta \) then \(\Gamma , \neg A \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\wedge \)]</b> If \(\Gamma \vdash \Delta , A\) and \(\Gamma \vdash \Delta , B\) and \(\Gamma \vdash \Delta , A, B\) then \(\Gamma \vdash \Delta , A{\wedge }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\vee \)]</b> If \(\Gamma \vdash \Delta , A, B\) then \(\Gamma \vdash \Delta , A{\vee }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\to \)]</b> If \(\Gamma , A \vdash \Delta , B\) then \(\Gamma \vdash \Delta , A{\to }B\). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\neg \)]</b> If \(\Gamma , A \vdash \Delta \) then \(\Gamma \vdash \Delta , \neg A\). </p>
+</li>
+</ul>
+<p> The rules <b class="bfseries">[L\(\vee \)]</b>, <b class="bfseries">[L\(\to \)]</b>, and <b class="bfseries">[R\(\wedge \)]</b> each have a <em>third “mixed” premiss</em> that distinguishes NMMS from NMMS<sup>ctr</sup>. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:nmms">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:nmmsctr_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:nmmsctr" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">69</span><span class="definition_thmtitle">NMMS<sup>ctr</sup></span></div>
+    <div class="thm_thmcontent"><p>   The <b class="bfseries">NMMS<sup>ctr</sup></b> derivability predicate is defined exactly as NMMS except: </p>
+<ul class="itemize">
+  <li><p>Sequents are multisets: \(\Gamma , \Delta : \mathsf{Multiset}\; (\mathsf{Formula}\; \alpha )\). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\vee \)]</b> has only <em>two</em> premisses: \(\Gamma + \{ A\}  \vdash \Delta \) and \(\Gamma + \{ B\}  \vdash \Delta \) (no mixed third premiss). </p>
+</li>
+  <li><p><b class="bfseries">[L\(\to \)]</b> has only <em>two</em> premisses: \(\Gamma \vdash \Delta + \{ A\} \) and \(\Gamma + \{ B\}  \vdash \Delta \). </p>
+</li>
+  <li><p><b class="bfseries">[R\(\wedge \)]</b> has only <em>two</em> premisses: \(\Gamma \vdash \Delta + \{ A\} \) and \(\Gamma \vdash \Delta + \{ B\} \). </p>
+</li>
+  <li><p>All other rules are unchanged. </p>
+</li>
+</ul>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:nmmsctr">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMSctr">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:only-containment_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:only-containment" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">22</span></div>
+    <div class="thm_thmcontent"><p>   <em>Only-Containment</em>: a position is incoherent only if it contains both \(+p\) and \(-p\) for some \(p\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:only-containment">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsOnlyContainment">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:perp_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:perp" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">3</span></div>
+    <div class="thm_thmcontent"><p>   The <em>incoherence profile</em> of a set \(X\) of positions is </p>
+<div class="displaymath" id="a0000000009">
+  \[  X^\perp = \{ \, \Gamma \mid \forall \Delta \in X,\;  \Gamma \mathbin {+\! \! +} \Delta \in \mathcal{I}\, \} .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:perp">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.perp">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:persistent_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:persistent" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">14</span></div>
+    <div class="thm_thmcontent"><p>   An incoherence space is <em>persistent</em> if \(\Gamma \in \mathcal{I}\) implies \(\Gamma \mathbin {+\! \! +} \Delta \in \mathcal{I}\) for all \(\Delta \). Intuitively: adding more moves to an incoherent position cannot restore coherence. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#def:persistent">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsPersistent">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:satisfies_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:satisfies" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">71</span><span class="definition_thmtitle">Satisfaction</span></div>
+    <div class="thm_thmcontent"><p>    \(\mathsf{Satisfies}\; M\; \Gamma \; \Delta \) holds when \(M \models \Gamma \vdash \Delta \). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#def:satisfies">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/Satisfies">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ternary-assoc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ternary-assoc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">57</span></div>
+    <div class="thm_thmcontent"><p>   A ternary frame is <em>associative</em> if \((R(x,y,z) \wedge R(z,u,v)) \iff (\exists w, R(y,u,w) \wedge R(x,w,v))\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:ternary-assoc">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.IsAssociative">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ternary-comm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ternary-comm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">55</span></div>
+    <div class="thm_thmcontent"><p>   A ternary frame is <em>commutative</em> if \(R(x, y, z) \Rightarrow R(y, x, z)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:ternary-comm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.IsCommutative">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ternary-frame_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ternary-frame" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">51</span></div>
+    <div class="thm_thmcontent"><p>  A <em>ternary frame</em> on \(W\) is a ternary relation \(R : W \to W \to W \to \mathsf{Prop}\). We read \(R(x, y, z)\) as “\(z\) is a possible result of combining \(x\) and \(y\)”. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:ternary-frame">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ternary-lhom_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ternary-lhom" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">53</span></div>
+    <div class="thm_thmcontent"><p>   The <em>left residual</em> is \(P \multimap Q = \{ \, x \mid \forall y \in P,\; \forall z,\;  R(x, y, z) \Rightarrow z \in Q\, \} \). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:ternary-lhom">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.lhom">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="def:ternary-tensor_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="def:ternary-tensor" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">52</span></div>
+    <div class="thm_thmcontent"><p>   The <em>multiplicative tensor</em> of two sets \(P, Q \subseteq W\) is </p>
+<div class="displaymath" id="a0000000034">
+  \[  P \otimes Q = \{ \, x \mid \exists y \in P,\;  \exists z \in Q,\;  R(y, z, x)\, \} .  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0004.html#def:ternary-tensor">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.tensor">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:closed-set-partialorder_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:closed-set-partialorder" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">33</span></div>
+    <div class="thm_thmcontent"><p>   Closed sets are partially ordered by set inclusion. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:closed-set-partialorder">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instPartialOrder">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:dperp-empty_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:dperp-empty" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">27</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \(\emptyset ^{\perp \perp } = \mathcal{I}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:dperp-empty">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_empty">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:dperp-fusion-congr-left_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:dperp-fusion-congr-left" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">41</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \((X^{\perp \perp } \mathbin {\dot\cup } Y)^{\perp \perp } = (X \mathbin {\dot\cup } Y)^{\perp \perp }\): replacing \(X\) by \(X^{\perp \perp }\) in the left slot of fusion does not change the closure. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:dperp-fusion-congr-left">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_fusion_congr_left">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:dperp-fusion-congr-right_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:dperp-fusion-congr-right" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">40</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \((X \mathbin {\dot\cup } Y^{\perp \perp })^{\perp \perp } = (X \mathbin {\dot\cup } Y)^{\perp \perp }\): replacing \(Y\) by \(Y^{\perp \perp }\) in the right slot of fusion does not change the closure. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#lem:dperp-fusion-congr-right">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_fusion_congr_right">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:dperp-idempotent_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:dperp-idempotent" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">18</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \((X^{\perp \perp })^{\perp \perp } = X^{\perp \perp }\) (idempotency of \({\perp \perp }\)). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:dperp-idempotent">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_idempotent">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:dperp-mono_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:dperp-mono" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">6</span></div>
+    <div class="thm_thmcontent"><p>   \(X \subseteq Y \Rightarrow X^{\perp \perp } \subseteq Y^{\perp \perp }\) (dperp is monotone). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:dperp-mono">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dperp_mono">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:fusion-assoc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:fusion-assoc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">11</span></div>
+    <div class="thm_thmcontent"><p>   Fusion is associative: \((X \mathbin {\dot\cup } Y) \mathbin {\dot\cup } Z = X \mathbin {\dot\cup } (Y \mathbin {\dot\cup } Z)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:fusion-assoc">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.fusion_assoc">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:fusion-nil-left_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:fusion-nil-left" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">12</span></div>
+    <div class="thm_thmcontent"><p>   \(\{ []\}  \mathbin {\dot\cup } X = X\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:fusion-nil-left">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.fusion_nil_left">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:fusion-nil-right_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:fusion-nil-right" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">13</span></div>
+    <div class="thm_thmcontent"><p>   \(X \mathbin {\dot\cup } \{ []\}  = X\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:fusion-nil-right">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.fusion_nil_right">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:I-append-comm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:I-append-comm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">16</span></div>
+    <div class="thm_thmcontent"><p>   \(\Gamma \mathbin {+\! \! +} \Delta \in \mathcal{I} \iff \Delta \mathbin {+\! \! +} \Gamma \in \mathcal{I}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:I-append-comm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.I_append_comm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:I-dperp-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:I-dperp-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">28</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \(\mathcal{I}\) is \({\perp \perp }\)-closed. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:I-dperp-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.I_dperp_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:I-subset-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:I-subset-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">29</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \(\mathcal{I} \subseteq X\) for every \({\perp \perp }\)-closed set \(X\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:I-subset-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.I_subset_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:iInter-dperp-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:iInter-dperp-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">34</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, any arbitrary intersection of \({\perp \perp }\)-closed sets is \({\perp \perp }\)-closed. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:iInter-dperp-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.iInter_dperp_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:incomp-refl_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:incomp-refl" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">8</span></div>
+    <div class="thm_thmcontent"><p>   Incompatibility entailment is reflexive. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:incomp-refl">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.incompEntails_refl">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:incomp-trans_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:incomp-trans" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">9</span></div>
+    <div class="thm_thmcontent"><p>   Incompatibility entailment is transitive. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:incomp-trans">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.incompEntails_trans">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:inter-dperp-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:inter-dperp-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">19</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, the intersection of two \({\perp \perp }\)-closed sets is \({\perp \perp }\)-closed. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:inter-dperp-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.inter_dperp_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:inter-perp-eq-I_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:inter-perp-eq-I" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">30</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, for any \({\perp \perp }\)-closed \(X\): \(X \cap X^\perp = \mathcal{I}\). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:inter-perp-eq-I">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.inter_perp_eq_I">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:perp-antimono_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:perp-antimono" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">5</span></div>
+    <div class="thm_thmcontent"><p>   \(X \subseteq Y \Rightarrow Y^\perp \subseteq X^\perp \) (perp is antitone). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:perp-antimono">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.perp_antimono">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:perp-dperp-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:perp-dperp-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">20</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \(X^\perp \) is always \({\perp \perp }\)-closed: \((X^\perp )^{\perp \perp } = X^\perp \). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:perp-dperp-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.perp_dperp_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:perp-singleton-append-comm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:perp-singleton-append-comm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">61</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \(\{ \Gamma \mathbin {+\! \! +} \Delta \} ^\perp = \{ \Delta \mathbin {+\! \! +} \Gamma \} ^\perp \). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#lem:perp-singleton-append-comm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.perp_singleton_append_comm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:perp-union_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:perp-union" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">26</span></div>
+    <div class="thm_thmcontent"><p>   \(\textrm{perp}(X \cup Y) = X^\perp \cap Y^\perp \). This holds without any structural conditions. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:perp-union">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.perp_union">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:subset-dperp_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:subset-dperp" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">17</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \(X \subseteq X^{\perp \perp }\) (extensiveness of \({\perp \perp }\)). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:subset-dperp">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.subset_dperp">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:union-perp-closed_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:union-perp-closed" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">31</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, for any \({\perp \perp }\)-closed \(X\): \((X \cup X^\perp )^{\perp \perp } = \top \). </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#lem:union-perp-closed">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.union_perp_closed">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:closed-set-boolean_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:closed-set-boolean" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">37</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, <span class="ttfamily">ClosedSet</span> \(L\) is a complemented lattice with: </p>
+<ul class="itemize">
+  <li><p>\(\bot = \mathcal{I}\) (the incoherence set). </p>
+</li>
+  <li><p>The complement of \(X\) is \(X^\perp \). </p>
+</li>
+  <li><p>\(X \sqcap X^\perp = \bot \) and \(X \sqcup X^\perp = \top \). </p>
+</li>
+</ul>
+</div>
+
+    <a class="latex_link" href="sect0002.html#prop:closed-set-boolean">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instComplementedLattice">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:closed-set-comm-monoid_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:closed-set-comm-monoid" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">49</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \((\texttt{ClosedSet}\; L, \otimes ^c, \mathbf{1})\) is a commutative monoid. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:closed-set-comm-monoid">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instCommMonoid">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:closed-set-lattice_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:closed-set-lattice" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">35</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, <span class="ttfamily">ClosedSet</span> \(L\) is a lattice: </p>
+<ul class="itemize">
+  <li><p>\(X \sqcap Y = X \cap Y\) (intersection of closed sets is closed). </p>
+</li>
+  <li><p>\(X \sqcup Y = (X \cup Y)^{\perp \perp }\) (the closure of the union). </p>
+</li>
+  <li><p>\(\top = \mathcal{U}\) (the universe, always closed under Exchange). </p>
+</li>
+</ul>
+</div>
+
+    <a class="latex_link" href="sect0002.html#prop:closed-set-lattice">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instLattice">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:closed-set-monoid_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:closed-set-monoid" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">48</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, \((\texttt{ClosedSet}\; L, \otimes ^c, \mathbf{1})\) is a monoid. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:closed-set-monoid">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instMonoid">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:comm-pos_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:comm-pos" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">62</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, the ternary frame on positions is commutative. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:comm-pos">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.instIsCommutativePos">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:containment-implies-exchange_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:containment-implies-exchange" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">24</span></div>
+    <div class="thm_thmcontent"><p>   All-and-only Containment implies Exchange. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#prop:containment-implies-exchange">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsContainment.toIsExchange">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:containment-implies-persistent_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:containment-implies-persistent" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">25</span></div>
+    <div class="thm_thmcontent"><p>   All-and-only Containment implies Persistence. </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#prop:containment-implies-persistent">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.IsContainment.toIsPersistent">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:dtensor-assoc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:dtensor-assoc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">44</span></div>
+    <div class="thm_thmcontent"><p>   The Day convolution tensor is associative: \((X \otimes ^c Y) \otimes ^c Z = X \otimes ^c (Y \otimes ^c Z)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:dtensor-assoc">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_assoc">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:dtensor-comm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:dtensor-comm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">47</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, the Day convolution tensor is commutative: \(X \otimes ^c Y = Y \otimes ^c X\). </p>
+<p>Under Containment, incoherence depends only on the <em>set</em> of moves present, so \((X \mathbin {\dot\cup } Y)^{\perp \perp } = (Y \mathbin {\dot\cup } X)^{\perp \perp }\). </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:dtensor-comm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_comm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:dtensor-unit-left_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:dtensor-unit-left" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">45</span></div>
+    <div class="thm_thmcontent"><p>   \(\mathbf{1} \otimes ^c X = X\): the unit is a left identity. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:dtensor-unit-left">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_dunit_left">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:dtensor-unit-right_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:dtensor-unit-right" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">46</span></div>
+    <div class="thm_thmcontent"><p>   \(X \otimes ^c \mathbf{1} = X\): the unit is a right identity. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#prop:dtensor-unit-right">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.dtensor_dunit_right">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:preorder-pos_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:preorder-pos" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">59</span></div>
+    <div class="thm_thmcontent"><p>   Positions form a preorder under incompatibility entailment: </p>
+<div class="displaymath" id="a0000000035">
+  \[  \Gamma \leq \Delta \iff \{ \Gamma \} ^\perp \subseteq \{ \Delta \} ^\perp .  \]
+</div>
+<p> This matches the blog’s \(p \leq _{\mathit{IE}} q\) iff \(\{ p\} ^\perp \subseteq \{ q\} ^\perp \). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:preorder-pos">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.instPreorderPos">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:residuation_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:residuation" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">54</span></div>
+    <div class="thm_thmcontent"><p>   Left residuation: \(P \otimes Q \subseteq S \iff P \subseteq Q \multimap S\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:residuation">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.tensor_sub_iff_sub_lhom">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:tensor-assoc_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:tensor-assoc" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">58</span></div>
+    <div class="thm_thmcontent"><p>   Under associativity of \(R\), tensor is associative: \((P \otimes Q) \otimes S = P \otimes (Q \otimes S)\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:tensor-assoc">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.tensor_assoc">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:tensor-comm_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:tensor-comm" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">56</span></div>
+    <div class="thm_thmcontent"><p>   Under commutativity of \(R\), tensor is commutative: \(P \otimes Q = Q \otimes P\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:tensor-comm">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/TernaryFrame.tensor_comm">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:ternary-frame-pos_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:ternary-frame-pos" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">60</span></div>
+    <div class="thm_thmcontent"><p>   Positions form a ternary frame with </p>
+<div class="displaymath" id="a0000000036">
+  \[  R(\Gamma , \Delta , \Theta ) \iff \Theta \vDash _{\mathcal{I}} \Gamma \mathbin {+\! \! +} \Delta \iff \{ \Gamma \mathbin {+\! \! +} \Delta \} ^\perp \subseteq \{ \Theta \} ^\perp .  \]
+</div>
+<p> In words: “\(\Theta \) is achievable from combining \(\Gamma \) and \(\Delta \)”. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#prop:ternary-frame-pos">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.instTernaryFramePos">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:closed-set-distriblattice_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:closed-set-distriblattice" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">38</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, the lattice of \({\perp \perp }\)-closed sets is distributive. </p>
+<p>The proof uses Zorn’s lemma to extend coherent sets of moves to maximal ones, then injects the lattice into a power-set Boolean algebra. </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#thm:closed-set-distriblattice">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instDistribLattice">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:closed-set-quantale_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:closed-set-quantale" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">50</span></div>
+    <div class="thm_thmcontent"><p>   Under Containment, \((\texttt{ClosedSet}\; L, \otimes ^c)\) is a commutative unital quantale: a complete lattice in which \(\otimes ^c\) distributes over all joins. </p>
+<div class="displaymath" id="a0000000033">
+  \[  X \otimes ^c \bigsqcup _{i} Y_i = \bigsqcup _i (X \otimes ^c Y_i).  \]
+</div>
+<p> This is the main algebraic result of the formalization. </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#thm:closed-set-quantale">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.ClosedSet.instIsQuantale">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:dtensor-eq-dperp-tensor_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:dtensor-eq-dperp-tensor" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">65</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, the Day convolution equals the \({\perp \perp }\)-closure of the tensor: </p>
+<div class="displaymath" id="a0000000037">
+  \[  X \otimes ^c Y = (X \otimes Y)^{\perp \perp }.  \]
+</div>
+<p> This is the main connection theorem: the semantic tensor is \((X \mathbin {\dot\cup } Y)^{\perp \perp } = (X \otimes Y)^{\perp \perp }\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:dtensor-eq-dperp-tensor">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.dtensor_eq_dperp_tensor">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:fusion-sub-tensor_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:fusion-sub-tensor" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">63</span></div>
+    <div class="thm_thmcontent"><p>   The fusion is contained in the tensor product: \(X \mathbin {\dot\cup } Y \subseteq X \otimes Y\). </p>
+<p>For \(\Theta = \Gamma \mathbin {+\! \! +} \Delta \in X \mathbin {\dot\cup } Y\), we have \(R(\Gamma , \Delta , \Gamma \mathbin {+\! \! +} \Delta )\) by reflexivity. This holds for bare <span class="ttfamily">IncoherenceSpace</span>. </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:fusion-sub-tensor">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.fusion_sub_tensor">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:nmms-complete_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:nmms-complete" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">75</span><span class="theorem_thmtitle">NMMS Completeness (Theorem 76, \(\leftarrow \))</span></div>
+    <div class="thm_thmcontent"><p>    Every b-valid sequent is derivable in \(\mathsf{NMMS}\; \mathsf{base}\): </p>
+<div class="displaymath" id="a0000000041">
+  \[  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta \; \Rightarrow \;  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> The proof uses a canonical model (principal b-model) construction. </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:nmms-complete">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_complete">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:nmms-iff-bvalid_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:nmms-iff-bvalid" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">76</span><span class="theorem_thmtitle">Theorem 76 (RLLR, p.&#160;222)</span></div>
+    <div class="thm_thmcontent"><p>    For any base \(\mathsf{base}\) and sentences \(\Gamma \), \(\Delta \) in the logically extended lexicon: </p>
+<div class="displaymath" id="a0000000042">
+  \[  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta \; \longleftrightarrow \;  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> NMMS derivability coincides exactly with b-validity (soundness and completeness). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:nmms-iff-bvalid">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_iff_bValid">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:nmms-sound_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:nmms-sound" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">74</span><span class="theorem_thmtitle">NMMS Soundness (Theorem 76, \(\to \))</span></div>
+    <div class="thm_thmcontent"><p>    Every sequent derivable in \(\mathsf{NMMS}\; \mathsf{base}\) is b-valid: </p>
+<div class="displaymath" id="a0000000040">
+  \[  \mathsf{NMMS}\; \mathsf{base}\; \Gamma \; \Delta \; \Rightarrow \;  \mathsf{bValid}\; \mathsf{base}\; \Gamma \; \Delta .  \]
+</div>
+<p> The proof proceeds by induction on the derivation tree; each logical rule is shown to preserve b-validity (Props.&#160;51 and&#160;53 in <span class="cite">
+	[
+</span>). </p>
+</div>
+
+    <a class="latex_link" href="sect0005.html#thm:nmms-sound">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/NMMS_sound">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="thm:tensor-sub-dtensor_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="thm:tensor-sub-dtensor" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">64</span></div>
+    <div class="thm_thmcontent"><p>   Under Exchange, the tensor product is contained in the Day convolution: \(X \otimes Y \subseteq X \otimes ^c Y\). </p>
+<p>For \(\Theta \in X \otimes Y\), antitonicity gives \((X \mathbin {\dot\cup } Y)^\perp \subseteq \{ \Gamma \mathbin {+\! \! +} \Delta \} ^\perp \subseteq \{ \Theta \} ^\perp \), so \(\Theta \in (X \mathbin {\dot\cup } Y)^{\perp \perp } = X \otimes ^c Y\). </p>
+</div>
+
+    <a class="latex_link" href="sect0004.html#thm:tensor-sub-dtensor">LaTeX</a>
+    
+    
+  <a class="lean_link lean_decl" href="https://lucyhorowitz.github.io/TernaryFrames/docs/find/#doc/IncoherenceSpace.tensor_sub_dtensor">Lean</a>
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+</div>
+</div> <!-- content -->
+</div> <!-- wrapper -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+
+<script src="js/d3.min.js"></script>
+<script src="js/hpcc.min.js"></script>
+<script src="js/d3-graphviz.js"></script>
+
+<script type="text/javascript">
+const graphContainer = d3.select("#graph");
+const width = graphContainer.node().clientWidth;
+const height = graphContainer.node().clientHeight;
+
+
+graphContainer.graphviz({useWorker: true})
+    .width(width)
+    .height(height)
+    .fit(true)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	"def:perp"	[color=green,		fillcolor="#B0ECA3",		label=perp,		shape=box,		style=filled];	"lem:perp-union"	[color=green,		label="perp-union",		shape=ellipse];	"def:perp" -> "lem:perp-union"	[style=dashed];	"lem:perp-antimono"	[color=green,		label="perp-antimono",		shape=ellipse];	"def:perp" -> "lem:perp-antimono"	[style=dashed];	"def:incomp-entails"	[color=green,		fillcolor="#B0ECA3",		label="incomp-entails",		shape=box,		style=filled];	"def:perp" -> "def:incomp-entails"	[style=dashed];	"def:dperp"	[color=green,		fillcolor="#B0ECA3",		label=dperp,		shape=box,		style=filled];	"def:perp" -> "def:dperp"	[style=dashed];	"lem:perp-singleton-append-comm"	[color=green,		label="perp-singleton-append-comm",		shape=ellipse];	"def:perp" -> "lem:perp-singleton-append-comm"	[style=dashed];	"lem:union-perp-closed"	[color=green,		label="union-perp-closed",		shape=ellipse];	"lem:perp-union" -> "lem:union-perp-closed"	[style=dashed];	"lem:dperp-mono"	[color=green,		label="dperp-mono",		shape=ellipse];	"lem:perp-antimono" -> "lem:dperp-mono"	[style=dashed];	"lem:dperp-idempotent"	[color=green,		label="dperp-idempotent",		shape=ellipse];	"lem:perp-antimono" -> "lem:dperp-idempotent"	[style=dashed];	"lem:incomp-trans"	[color=green,		label="incomp-trans",		shape=ellipse];	"def:incomp-entails" -> "lem:incomp-trans"	[style=dashed];	"lem:incomp-refl"	[color=green,		label="incomp-refl",		shape=ellipse];	"def:incomp-entails" -> "lem:incomp-refl"	[style=dashed];	"def:dperp" -> "lem:dperp-mono"	[style=dashed];	"def:closed-set"	[color=green,		fillcolor="#B0ECA3",		label="closed-set",		shape=box,		style=filled];	"def:dperp" -> "def:closed-set"	[style=dashed];	"lem:dperp-empty"	[color=green,		label="dperp-empty",		shape=ellipse];	"def:dperp" -> "lem:dperp-empty"	[style=dashed];	"lem:subset-dperp"	[color=green,		label="subset-dperp",		shape=ellipse];	"def:dperp" -> "lem:subset-dperp"	[style=dashed];	"prop:comm-pos"	[color=green,		label="comm-pos",		shape=ellipse];	"lem:perp-singleton-append-comm" -> "prop:comm-pos"	[style=dashed];	"prop:closed-set-boolean"	[color=green,		label="closed-set-boolean",		shape=ellipse];	"lem:union-perp-closed" -> "prop:closed-set-boolean"	[style=dashed];	"lem:inter-dperp-closed"	[color=green,		label="inter-dperp-closed",		shape=ellipse];	"lem:dperp-mono" -> "lem:inter-dperp-closed"	[style=dashed];	"lem:iInter-dperp-closed"	[color=green,		label="iInter-dperp-closed",		shape=ellipse];	"lem:dperp-mono" -> "lem:iInter-dperp-closed"	[style=dashed];	"lem:dperp-fusion-congr-left"	[color=green,		label="dperp-fusion-congr-left",		shape=ellipse];	"lem:dperp-mono" -> "lem:dperp-fusion-congr-left"	[style=dashed];	"lem:dperp-fusion-congr-right"	[color=green,		label="dperp-fusion-congr-right",		shape=ellipse];	"lem:dperp-mono" -> "lem:dperp-fusion-congr-right"	[style=dashed];	"lem:I-subset-closed"	[color=green,		label="I-subset-closed",		shape=ellipse];	"lem:dperp-mono" -> "lem:I-subset-closed"	[style=dashed];	"lem:dperp-idempotent" -> "lem:inter-dperp-closed"	[style=dashed];	"def:dtensor"	[color=green,		fillcolor="#B0ECA3",		label=dtensor,		shape=box,		style=filled];	"lem:dperp-idempotent" -> "def:dtensor"	[style=dashed];	"lem:I-dperp-closed"	[color=green,		label="I-dperp-closed",		shape=ellipse];	"lem:dperp-idempotent" -> "lem:I-dperp-closed"	[style=dashed];	"lem:perp-dperp-closed"	[color=green,		label="perp-dperp-closed",		shape=ellipse];	"lem:dperp-idempotent" -> "lem:perp-dperp-closed"	[style=dashed];	"def:dunit"	[color=green,		fillcolor="#B0ECA3",		label=dunit,		shape=box,		style=filled];	"lem:dperp-idempotent" -> "def:dunit"	[style=dashed];	"lem:inter-perp-eq-I"	[color=green,		label="inter-perp-eq-I",		shape=ellipse];	"lem:inter-perp-eq-I" -> "lem:union-perp-closed"	[style=dashed];	"prop:preorder-pos"	[color=green,		label="preorder-pos",		shape=ellipse];	"lem:incomp-trans" -> "prop:preorder-pos"	[style=dashed];	"lem:incomp-refl" -> "prop:preorder-pos"	[style=dashed];	"prop:closed-set-lattice"	[color=green,		label="closed-set-lattice",		shape=ellipse];	"def:closed-set" -> "prop:closed-set-lattice"	[style=dashed];	"def:closed-set" -> "def:dtensor"	[style=dashed];	"def:compl-closed"	[color=green,		fillcolor="#B0ECA3",		label="compl-closed",		shape=box,		style=filled];	"def:closed-set" -> "def:compl-closed"	[style=dashed];	"lem:closed-set-partialorder"	[color=green,		label="closed-set-partialorder",		shape=ellipse];	"def:closed-set" -> "lem:closed-set-partialorder"	[style=dashed];	"lem:dperp-empty" -> "lem:I-subset-closed"	[style=dashed];	"lem:dperp-empty" -> "lem:I-dperp-closed"	[style=dashed];	"lem:subset-dperp" -> "lem:dperp-idempotent"	[style=dashed];	"lem:subset-dperp" -> "lem:dperp-fusion-congr-left"	[style=dashed];	"lem:subset-dperp" -> "lem:dperp-fusion-congr-right"	[style=dashed];	"cor:iss-ternary-frame"	[color=green,		label="iss-ternary-frame",		shape=ellipse];	"prop:comm-pos" -> "cor:iss-ternary-frame"	[style=dashed];	"def:ternary-frame"	[color=green,		fillcolor="#B0ECA3",		label="ternary-frame",		shape=box,		style=filled];	"def:ternary-lhom"	[color=green,		fillcolor="#B0ECA3",		label="ternary-lhom",		shape=box,		style=filled];	"def:ternary-frame" -> "def:ternary-lhom"	[style=dashed];	"def:ternary-tensor"	[color=green,		fillcolor="#B0ECA3",		label="ternary-tensor",		shape=box,		style=filled];	"def:ternary-frame" -> "def:ternary-tensor"	[style=dashed];	"def:ternary-comm"	[color=green,		fillcolor="#B0ECA3",		label="ternary-comm",		shape=box,		style=filled];	"def:ternary-frame" -> "def:ternary-comm"	[style=dashed];	"def:ternary-assoc"	[color=green,		fillcolor="#B0ECA3",		label="ternary-assoc",		shape=box,		style=filled];	"def:ternary-frame" -> "def:ternary-assoc"	[style=dashed];	"prop:ternary-frame-pos"	[color=green,		label="ternary-frame-pos",		shape=ellipse];	"def:ternary-frame" -> "prop:ternary-frame-pos"	[style=dashed];	"prop:residuation"	[color=green,		label=residuation,		shape=ellipse];	"def:ternary-lhom" -> "prop:residuation"	[style=dashed];	"def:ternary-tensor" -> "prop:residuation"	[style=dashed];	"thm:fusion-sub-tensor"	[color=green,		label="fusion-sub-tensor",		shape=ellipse];	"def:ternary-tensor" -> "thm:fusion-sub-tensor"	[style=dashed];	"prop:tensor-comm"	[color=green,		label="tensor-comm",		shape=ellipse];	"def:ternary-tensor" -> "prop:tensor-comm"	[style=dashed];	"prop:tensor-assoc"	[color=green,		label="tensor-assoc",		shape=ellipse];	"def:ternary-tensor" -> "prop:tensor-assoc"	[style=dashed];	"def:ternary-comm" -> "prop:comm-pos"	[style=dashed];	"def:ternary-comm" -> "prop:tensor-comm"	[style=dashed];	"def:ternary-assoc" -> "prop:tensor-assoc"	[style=dashed];	"prop:ternary-frame-pos" -> "prop:comm-pos"	[style=dashed];	"prop:ternary-frame-pos" -> "thm:fusion-sub-tensor"	[style=dashed];	"thm:tensor-sub-dtensor"	[color=green,		label="tensor-sub-dtensor",		shape=ellipse];	"thm:fusion-sub-tensor" -> "thm:tensor-sub-dtensor"	[style=dashed];	"def:nmms"	[color=green,		fillcolor="#B0ECA3",		label=nmms,		shape=box,		style=filled];	"thm:nmms-sound"	[color=blue,		label="nmms-sound",		shape=ellipse];	"def:nmms" -> "thm:nmms-sound"	[style=dashed];	"thm:nmms-complete"	[color=blue,		label="nmms-complete",		shape=ellipse];	"def:nmms" -> "thm:nmms-complete"	[style=dashed];	"thm:nmms-iff-bvalid"	[label="nmms-iff-bvalid",		shape=ellipse];	"thm:nmms-sound" -> "thm:nmms-iff-bvalid"	[style=dashed];	"thm:nmms-complete" -> "thm:nmms-iff-bvalid"	[style=dashed];	"lem:fusion-nil-left"	[color=green,		label="fusion-nil-left",		shape=ellipse];	"prop:dtensor-unit-left"	[color=green,		label="dtensor-unit-left",		shape=ellipse];	"lem:fusion-nil-left" -> "prop:dtensor-unit-left"	[style=dashed];	"prop:closed-set-monoid"	[color=green,		label="closed-set-monoid",		shape=ellipse];	"prop:dtensor-unit-left" -> "prop:closed-set-monoid"	[style=dashed];	"prop:closed-set-comm-monoid"	[color=green,		label="closed-set-comm-monoid",		shape=ellipse];	"prop:closed-set-monoid" -> "prop:closed-set-comm-monoid"	[style=dashed];	"lem:inter-dperp-closed" -> "prop:closed-set-lattice"	[style=dashed];	"prop:closed-set-lattice" -> "prop:closed-set-boolean"	[style=dashed];	"thm:closed-set-distriblattice"	[color=green,		label="closed-set-distriblattice",		shape=ellipse];	"prop:closed-set-boolean" -> "thm:closed-set-distriblattice"	[style=dashed];	"cor:closed-set-complete-lattice"	[color=green,		label="closed-set-complete-lattice",		shape=ellipse];	"lem:iInter-dperp-closed" -> "cor:closed-set-complete-lattice"	[style=dashed];	"thm:closed-set-quantale"	[color=green,		label="closed-set-quantale",		shape=ellipse];	"cor:closed-set-complete-lattice" -> "thm:closed-set-quantale"	[style=dashed];	"thm:closed-set-quantale" -> "cor:iss-ternary-frame"	[style=dashed];	"lem:dperp-fusion-congr-left" -> "prop:dtensor-unit-left"	[style=dashed];	"prop:dtensor-assoc"	[color=green,		label="dtensor-assoc",		shape=ellipse];	"lem:dperp-fusion-congr-left" -> "prop:dtensor-assoc"	[style=dashed];	"prop:dtensor-assoc" -> "prop:closed-set-monoid"	[style=dashed];	"thm:dtensor-eq-dperp-tensor"	[color=green,		label="dtensor-eq-dperp-tensor",		shape=ellipse];	"thm:tensor-sub-dtensor" -> "thm:dtensor-eq-dperp-tensor"	[style=dashed];	"thm:dtensor-eq-dperp-tensor" -> "cor:iss-ternary-frame"	[style=dashed];	"thm:closed-set-distriblattice" -> "cor:closed-set-complete-lattice"	[style=dashed];	"def:move"	[color=green,		fillcolor="#B0ECA3",		label=move,		shape=box,		style=filled];	"def:incoherence-space"	[color=green,		fillcolor="#B0ECA3",		label="incoherence-space",		shape=box,		style=filled];	"def:move" -> "def:incoherence-space"	[style=dashed];	"def:fusion"	[color=green,		fillcolor="#B0ECA3",		label=fusion,		shape=box,		style=filled];	"def:move" -> "def:fusion"	[style=dashed];	"def:incoherence-space" -> "def:perp"	[style=dashed];	"def:all-containment"	[color=green,		fillcolor="#B0ECA3",		label="all-containment",		shape=box,		style=filled];	"def:incoherence-space" -> "def:all-containment"	[style=dashed];	"def:only-containment"	[color=green,		fillcolor="#B0ECA3",		label="only-containment",		shape=box,		style=filled];	"def:incoherence-space" -> "def:only-containment"	[style=dashed];	"def:persistent"	[color=green,		fillcolor="#B0ECA3",		label=persistent,		shape=box,		style=filled];	"def:incoherence-space" -> "def:persistent"	[style=dashed];	"def:exchange"	[color=green,		fillcolor="#B0ECA3",		label=exchange,		shape=box,		style=filled];	"def:incoherence-space" -> "def:exchange"	[style=dashed];	"def:fusion" -> "thm:fusion-sub-tensor"	[style=dashed];	"def:fusion" -> "lem:fusion-nil-left"	[style=dashed];	"def:fusion" -> "lem:dperp-fusion-congr-left"	[style=dashed];	"lem:fusion-assoc"	[color=green,		label="fusion-assoc",		shape=ellipse];	"def:fusion" -> "lem:fusion-assoc"	[style=dashed];	"def:fusion" -> "def:dtensor"	[style=dashed];	"def:fusion" -> "lem:dperp-fusion-congr-right"	[style=dashed];	"lem:fusion-nil-right"	[color=green,		label="fusion-nil-right",		shape=ellipse];	"def:fusion" -> "lem:fusion-nil-right"	[style=dashed];	"def:containment"	[color=green,		fillcolor="#B0ECA3",		label=containment,		shape=box,		style=filled];	"def:all-containment" -> "def:containment"	[style=dashed];	"def:only-containment" -> "def:containment"	[style=dashed];	"def:persistent" -> "lem:dperp-empty"	[style=dashed];	"prop:containment-implies-persistent"	[color=green,		label="containment-implies-persistent",		shape=ellipse];	"def:persistent" -> "prop:containment-implies-persistent"	[style=dashed];	"def:exchange" -> "lem:iInter-dperp-closed"	[style=dashed];	"prop:containment-implies-exchange"	[color=green,		label="containment-implies-exchange",		shape=ellipse];	"def:exchange" -> "prop:containment-implies-exchange"	[style=dashed];	"lem:I-append-comm"	[color=green,		label="I-append-comm",		shape=ellipse];	"def:exchange" -> "lem:I-append-comm"	[style=dashed];	"def:containment" -> "lem:perp-singleton-append-comm"	[style=dashed];	"def:containment" -> "lem:dperp-empty"	[style=dashed];	"def:containment" -> "prop:containment-implies-exchange"	[style=dashed];	"def:containment" -> "prop:containment-implies-persistent"	[style=dashed];	"def:containment" -> "def:compl-closed"	[style=dashed];	"prop:dtensor-comm"	[color=green,		label="dtensor-comm",		shape=ellipse];	"def:containment" -> "prop:dtensor-comm"	[style=dashed];	"lem:fusion-assoc" -> "prop:dtensor-assoc"	[style=dashed];	"def:dtensor" -> "prop:dtensor-unit-left"	[style=dashed];	"def:dtensor" -> "prop:dtensor-assoc"	[style=dashed];	"def:dtensor" -> "thm:tensor-sub-dtensor"	[style=dashed];	"prop:dtensor-unit-right"	[color=green,		label="dtensor-unit-right",		shape=ellipse];	"def:dtensor" -> "prop:dtensor-unit-right"	[style=dashed];	"def:dtensor" -> "prop:dtensor-comm"	[style=dashed];	"lem:dperp-fusion-congr-right" -> "prop:dtensor-assoc"	[style=dashed];	"lem:dperp-fusion-congr-right" -> "prop:dtensor-unit-right"	[style=dashed];	"lem:fusion-nil-right" -> "prop:dtensor-unit-right"	[style=dashed];	"def:bvalid"	[color=green,		fillcolor="#B0ECA3",		label=bvalid,		shape=box,		style=filled];	"def:bvalid" -> "thm:nmms-sound"	[style=dashed];	"def:bvalid" -> "thm:nmms-complete"	[style=dashed];	"prop:dtensor-unit-right" -> "prop:closed-set-monoid"	[style=dashed];	"prop:closed-set-comm-monoid" -> "thm:closed-set-quantale"	[style=dashed];	"lem:I-append-comm" -> "lem:subset-dperp"	[style=dashed];	"def:compl-closed" -> "prop:closed-set-boolean"	[style=dashed];	"prop:dtensor-comm" -> "prop:closed-set-comm-monoid"	[style=dashed];	"lem:I-subset-closed" -> "lem:inter-perp-eq-I"	[style=dashed];	"lem:I-dperp-closed" -> "prop:closed-set-boolean"	[style=dashed];	"lem:perp-dperp-closed" -> "def:compl-closed"	[style=dashed];	"def:formula"	[color=green,		fillcolor="#B0ECA3",		label=formula,		shape=box,		style=filled];	"def:consequence-space"	[color=green,		fillcolor="#B0ECA3",		label="consequence-space",		shape=box,		style=filled];	"def:satisfies"	[color=green,		fillcolor="#B0ECA3",		label=satisfies,		shape=box,		style=filled];	"def:consequence-space" -> "def:satisfies"	[style=dashed];	"def:fits-base"	[color=green,		fillcolor="#B0ECA3",		label="fits-base",		shape=box,		style=filled];	"def:satisfies" -> "def:fits-base"	[style=dashed];	"def:fits-base" -> "def:bvalid"	[style=dashed];	"def:dunit" -> "prop:dtensor-unit-left"	[style=dashed];	"def:dunit" -> "prop:dtensor-unit-right"	[style=dashed];	"prop:preorder-pos" -> "prop:ternary-frame-pos"	[style=dashed];	"def:nmmsctr"	[color=green,		fillcolor="#B0ECA3",		label=nmmsctr,		shape=box,		style=filled];}`)
+    .on("end", interactive);
+
+latexLabelEscaper = function(label) {
+  return label.replace(/\./g, '\\.').replace(/:/g, '\\:')
+}
+
+clickNode = function() {
+  $("#statements div").hide()
+  var node_id = $('text', this).text();
+  $('.thm').hide();
+  $('#'+latexLabelEscaper(node_id)).show().children().show();
+}
+function interactive() {
+    $("span#legend_title").on("click", function () {
+           $(this).siblings('dl').toggle();
+        })
+
+    d3.selectAll('.node')
+        .attr('pointer-events', 'fill')
+        .on('click', function () {
+           var title = d3.select(this).selectAll('title').text().trim();
+           $('#statements > div').hide()
+           $('.thm').hide();
+           $('#'+latexLabelEscaper(title)+'_modal').show().children().show().children().show();
+           $('#statements').show()
+        });
+
+    d3.selectAll('.dep-closebtn').on('click', function() {
+        var modal =
+            d3.select(this).node().parentNode.parentNode.parentNode ;
+        d3.select(modal).style('display', 'none');
+    });
+}
+
+</script>
+
+</body>
+</html>
