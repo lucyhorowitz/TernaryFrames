@@ -444,6 +444,18 @@ theorem closed_moves_mono {X : Set (List (Move L))} (hX : dperp X = X)
     List.mem_append.mpr (hd.elim (fun h => Or.inr h)
       (fun h => Or.inl (mem_moves_iff.mp (hmoves (mem_moves_iff.mpr h)))))⟩
 
+/-- Under Containment, every `dperp`-closed set validates semantic contraction:
+`Γ ∈ X` iff `Γ ++ Γ ∈ X`. -/
+theorem closed_contraction {X : Set (List (Move L))} (hX : dperp X = X)
+    (Γ : List (Move L)) : Γ ∈ X ↔ Γ ++ Γ ∈ X := by
+  constructor
+  · intro hΓ
+    exact closed_moves_mono hX hΓ (fun m hm =>
+      mem_moves_iff.mpr (List.mem_append.mpr (Or.inl (mem_moves_iff.mp hm))))
+  · intro hΓΓ
+    exact closed_moves_mono hX hΓΓ (fun m hm =>
+      mem_moves_iff.mpr ((List.mem_append.mp (mem_moves_iff.mp hm)).elim id id))
+
 omit [IncoherenceSpace L] in
 /-- The union of a chain of coherent move-sets is coherent. -/
 theorem coherentMoves_sUnion_chain {c : Set (Set (Move L))}
