@@ -1,5 +1,8 @@
 import TernaryFrames.Basic
+import TernaryFrames.Formula
 import TernaryFrames.IncoherenceSpace
 import TernaryFrames.Containment
 import TernaryFrames.DayConvolution
 import TernaryFrames.ISSTernaryFrame
+import TernaryFrames.NMMS
+import TernaryFrames.Soundness
