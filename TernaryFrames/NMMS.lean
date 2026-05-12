@@ -57,7 +57,7 @@ with `(Γ ∩ Δ).Nonempty`.
 Rules for `lOr`, `lImp`, `rAnd` have **three** premisses (the "mixed" premiss distinguishes
 NMMS from the Ketonen-style NMMS^ctr).
 
-No weakening and no Cut (out of scope). -/
+No weakening and no Cut. -/
 inductive NMMS [DecidableEq α]
     (base : Finset (Formula α) → Finset (Formula α) → Prop) :
     Finset (Formula α) → Finset (Formula α) → Prop where
@@ -94,9 +94,7 @@ Sequents `Γ ⊢ Δ` have `Multiset (Formula α)` on each side, giving exchange 
 contraction.
 
 Rules for `lOr`, `lImp`, `rAnd` have **two** premisses (Ketonen-style), dropping the
-"mixed" third premiss of NMMS.
-
-No weakening and no Cut (out of scope). -/
+"mixed" third premiss of NMMS. -/
 inductive NMMSctr [DecidableEq α]
     (base : Multiset (Formula α) → Multiset (Formula α) → Prop) :
     Multiset (Formula α) → Multiset (Formula α) → Prop where

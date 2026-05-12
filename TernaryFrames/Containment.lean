@@ -141,6 +141,30 @@ theorem perp_union (X Y : Set (List (Move L))) :
 
 /-! ### The Containment conditions -/
 
+/-! #### Logical dependencies among assumptions
+
+In this development:
+
+* `IsContainment` (all + only) gives both `IsExchange` and `IsPersistent`
+  via the instances below.
+* `IsOnlyContainment` alone does **not** force either Exchange or Persistence.
+* `IsAllContainment` alone does **not** force either Exchange or Persistence.
+
+Countermodel sketches for the non-implications:
+
+* `Only` does not imply `Exchange`:
+  take an incoherence set containing only one ordered conflicting list (e.g. `[+p, -p]`)
+  and not its swap (`[-p, +p]`).
+* `Only` does not imply `Persistence`:
+  same model; `[+p, -p]` can be incoherent while `[+p, -p] ++ [+p]` is coherent.
+* `All` does not imply `Exchange`:
+  include all conflicting lists (to satisfy `All`) and add an extra incoherent ordered list
+  such as `[+p, +q]` but not `[+q, +p]`.
+* `All` does not imply `Persistence`:
+  include all conflicting lists and add an extra incoherent list such as `[+p]`, but not
+  all of its right-extensions (e.g. not `[+p, +p]`).
+-/
+
 /-- **"All" Containment**: any position containing both `+p` and `−p` for some `p` is
 incoherent. This is the forward direction of Containment. -/
 class IsAllContainment (L : Type u) [IncoherenceSpace L] : Prop where
@@ -164,7 +188,7 @@ theorem IsContainment.containment [IsContainment L] (Γ : List (Move L)) :
   ⟨IsOnlyContainment.only_containment Γ,
    fun ⟨p, ha, hd⟩ => IsAllContainment.all_containment p Γ ha hd⟩
 
-/-- Only-Containment implies Exchange. -/
+/-- Full Containment (all + only) implies Exchange. -/
 instance (priority := 100) IsContainment.toIsExchange [IsContainment L] : IsExchange L where
   exchange Γ Δ h := by
     obtain ⟨p, ha, hd⟩ := (IsContainment.containment (Γ ++ Δ)).mp h
@@ -172,12 +196,140 @@ instance (priority := 100) IsContainment.toIsExchange [IsContainment L] : IsExch
     exact (IsContainment.containment (Δ ++ Γ)).mpr
       ⟨p, List.mem_append.mpr ha.symm, List.mem_append.mpr hd.symm⟩
 
-/-- Only-Containment implies Persistence (given All-Containment). -/
+/-- Full Containment (all + only) implies Persistence. -/
 instance (priority := 100) IsContainment.toIsPersistent [IsContainment L] : IsPersistent L where
   persistent Γ Δ h := by
     obtain ⟨p, ha, hd⟩ := (IsContainment.containment Γ).mp h
     exact (IsContainment.containment (Γ ++ Δ)).mpr
       ⟨p, List.mem_append_left Δ ha, List.mem_append_left Δ hd⟩
+
+/-! #### Formal countermodels for non-implications
+
+The examples below machine-check that neither `IsOnlyContainment` nor `IsAllContainment`
+alone forces Exchange or Persistence.
+-/
+
+namespace Counterexamples
+
+section OnlyContainmentModel
+
+private def Ionly : Set (List (Move Unit)) :=
+  {Γ | Γ = [Move.assert (), Move.deny ()]}
+
+local instance : IncoherenceSpace Unit where
+  I := Ionly
+  empty_coherent := by simp [Ionly]
+
+local instance : IsOnlyContainment Unit where
+  only_containment Γ hΓ := by
+    have hΓ' : Γ = [Move.assert (), Move.deny ()] := by simpa [Ionly] using hΓ
+    subst hΓ'
+    exact ⟨(), by simp, by simp⟩
+
+theorem only_not_exchange : ¬ IsExchange Unit := by
+  intro hEx
+  let a : Move Unit := Move.assert ()
+  let d : Move Unit := Move.deny ()
+  have hIn : [a] ++ [d] ∈ I := by
+    change [a] ++ [d] ∈ Ionly
+    simp [a, d, Ionly]
+  letI : IsExchange Unit := hEx
+  have hSwap : [d] ++ [a] ∈ I := IsExchange.exchange [a] [d] hIn
+  have hNotSwap : [d] ++ [a] ∉ I := by
+    change [d] ++ [a] ∉ Ionly
+    simp [a, d, Ionly]
+  exact hNotSwap hSwap
+
+theorem only_not_persistent : ¬ IsPersistent Unit := by
+  intro hPers
+  let a : Move Unit := Move.assert ()
+  let d : Move Unit := Move.deny ()
+  have hIn : [a, d] ∈ I := by
+    change [a, d] ∈ Ionly
+    simp [a, d, Ionly]
+  letI : IsPersistent Unit := hPers
+  have hExt : [a, d] ++ [a] ∈ I := IsPersistent.persistent [a, d] [a] hIn
+  have hNotExt : [a, d] ++ [a] ∉ I := by
+    change [a, d] ++ [a] ∉ Ionly
+    simp [a, d, Ionly]
+  exact hNotExt hExt
+
+theorem onlyContainment_not_exchange : IsOnlyContainment Unit ∧ ¬ IsExchange Unit :=
+  ⟨inferInstance, only_not_exchange⟩
+
+theorem onlyContainment_not_persistent : IsOnlyContainment Unit ∧ ¬ IsPersistent Unit :=
+  ⟨inferInstance, only_not_persistent⟩
+
+end OnlyContainmentModel
+
+section AllContainmentExchangeModel
+
+private def HasConflictBoolEx (Γ : List (Move Bool)) : Prop :=
+  ∃ p : Bool, Move.assert p ∈ Γ ∧ Move.deny p ∈ Γ
+
+private def IallExchange : Set (List (Move Bool)) :=
+  {Γ | HasConflictBoolEx Γ ∨ Γ = [Move.assert true, Move.assert false]}
+
+local instance : IncoherenceSpace Bool where
+  I := IallExchange
+  empty_coherent := by simp [IallExchange, HasConflictBoolEx]
+
+local instance : IsAllContainment Bool where
+  all_containment p _ ha hd := Or.inl ⟨p, ha, hd⟩
+
+theorem all_not_exchange : ¬ IsExchange Bool := by
+  intro hEx
+  let a : Move Bool := Move.assert true
+  let b : Move Bool := Move.assert false
+  have hIn : [a] ++ [b] ∈ I := by
+    change [a] ++ [b] ∈ IallExchange
+    simp [a, b, IallExchange, HasConflictBoolEx]
+  letI : IsExchange Bool := hEx
+  have hSwap : [b] ++ [a] ∈ I := IsExchange.exchange [a] [b] hIn
+  have hNotSwap : [b] ++ [a] ∉ I := by
+    change [b] ++ [a] ∉ IallExchange
+    simp [a, b, IallExchange, HasConflictBoolEx]
+  exact hNotSwap hSwap
+
+theorem allContainment_not_exchange : IsAllContainment Bool ∧ ¬ IsExchange Bool :=
+  ⟨inferInstance, all_not_exchange⟩
+
+end AllContainmentExchangeModel
+
+section AllContainmentPersistentModel
+
+private def HasConflictBoolPers (Γ : List (Move Bool)) : Prop :=
+  ∃ p : Bool, Move.assert p ∈ Γ ∧ Move.deny p ∈ Γ
+
+private def IallPersistent : Set (List (Move Bool)) :=
+  {Γ | HasConflictBoolPers Γ ∨ Γ = [Move.assert true]}
+
+local instance : IncoherenceSpace Bool where
+  I := IallPersistent
+  empty_coherent := by simp [IallPersistent, HasConflictBoolPers]
+
+local instance : IsAllContainment Bool where
+  all_containment p _ ha hd := Or.inl ⟨p, ha, hd⟩
+
+theorem all_not_persistent : ¬ IsPersistent Bool := by
+  intro hPers
+  let a : Move Bool := Move.assert true
+  have hIn : [a] ∈ I := by
+    change [a] ∈ IallPersistent
+    simp [a, IallPersistent, HasConflictBoolPers]
+  letI : IsPersistent Bool := hPers
+  have hExt : [a] ++ [a] ∈ I := IsPersistent.persistent [a] [a] hIn
+  have hNotExt : [a] ++ [a] ∉ I := by
+    change [a] ++ [a] ∉ IallPersistent
+    simp [a, IallPersistent, HasConflictBoolPers]
+  exact hNotExt hExt
+
+theorem allContainment_not_persistent : IsAllContainment Bool ∧ ¬ IsPersistent Bool :=
+  ⟨inferInstance, all_not_persistent⟩
+
+end AllContainmentPersistentModel
+
+end Counterexamples
 
 section Containment
 
@@ -524,7 +676,18 @@ def Phi (X : Set (List (Move L))) (M : Set (Move L)) : Prop :=
 
 The distributivity proof uses Zorn's lemma and the fact that `Move L` is finite. When `L` is
 a `Fintype`, maximal coherent move-sets can be realized as lists, enabling a representation
-into a power-set Boolean algebra. -/
+into a power-set Boolean algebra.
+
+Why finiteness appears in this implementation:
+
+* The contradiction step needs a *single position* `Δ : List (Move L)` such that
+  `Δ ∈ perp X` while `moves Δ ⊆ M` for a maximal coherent move-set `M`.
+* We currently obtain `Δ` as `setToList M`.
+* Without `[Fintype L]`, `M` may be infinite, and there is generally no finite list with
+  `moves Δ = M`, so this separator construction is unavailable.
+
+So the `[Fintype L]` hypothesis here is a proof-encoding artifact tied to the
+`setToList` separator, not to earlier containment/closure lemmas. -/
 
 section Distributivity
 
@@ -635,6 +798,22 @@ coherent set `M`. Then:
 - So `¬Phi X M ∧ ¬Phi Y M` or `¬Phi X M ∧ ¬Phi Z M`.
 - Either way, `¬Phi (dperp (X ∪ Y)) M` or `¬Phi (dperp (X ∪ Z)) M`.
 - But `Γ ∈ dperp(X ∪ Y)` with `moves Γ ⊆ M` gives `Phi (dperp(X ∪ Y)) M` — contradiction. -/
+--
+-- Alternate proof strategy (as in the 2025-12-23 blog draft):
+--
+-- 1. Let `M` be the set of maximal coherent move-sets (obtained via Zorn).
+-- 2. Define `Phi` on closed sets by restriction to `M`.
+-- 3. Prove `Phi` is injective, using the maximal-extension reflection principle
+--    (already encoded here in the `Phi`/maximal-coherent lemmas).
+-- 4. Show `Phi` preserves:
+--    * meet (`⊓`) by intersection on carriers,
+--    * complement (`ᶜ`) via `perp` on closed sets and maximal coherence,
+--    * hence join (`⊔`) using complement + meet (or directly by closure/union arguments).
+-- 5. Since the codomain is a powerset Boolean algebra, distributivity transfers back
+--    along injective structure-preserving `Phi`.
+--
+-- The current implementation keeps a direct contradiction proof around `not_Phi_dperp_union`;
+-- the above is the same mathematical mechanism packaged as a conceptual embedding argument.
 instance instDistribLattice : DistribLattice (ClosedSet L) where
   le_sup_inf := by
     intro x y z Γ ⟨hΓxy, hΓxz⟩
