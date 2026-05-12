@@ -1,0 +1,9 @@
+title: TernaryFrames
+url: "https://lucyhorowitz.github.io"
+baseurl: "/TernaryFrames"
+repository: lucyhorowitz/TernaryFrames
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
